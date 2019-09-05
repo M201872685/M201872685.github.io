@@ -15,12 +15,12 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="【Java】力扣（21）合并两个有序链表一. 简要说明​        本文是作者在力扣上面遇到的一个题，题目其实很简单，由于我是一个初学者，所以做起来还是有点吃力，看官方的答案也看了好久才看懂。但是官方给的代码都是不完整的，只有程序中最关键的算法实现部分的代码。我结合官方的解答以及网上查的相关资料，总结整理了这篇文章，也算是纪念我的第一次java编程，如有错误，还望大家能够指出来，谢谢大家。 二">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/2019/09/05/leetcode21/E:%5Cblog%5Csource_posts%5Cleetcode21%5C1567603163016.jpg">
-<meta property="og:updated_time" content="2019-09-05T02:41:19.123Z">
+<meta property="og:image" content="http://yoursite.com/2019/09/05/leetcode21/1567603163016.jpg">
+<meta property="og:updated_time" content="2019-09-05T03:14:39.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java小白初编程">
 <meta name="twitter:description" content="【Java】力扣（21）合并两个有序链表一. 简要说明​        本文是作者在力扣上面遇到的一个题，题目其实很简单，由于我是一个初学者，所以做起来还是有点吃力，看官方的答案也看了好久才看懂。但是官方给的代码都是不完整的，只有程序中最关键的算法实现部分的代码。我结合官方的解答以及网上查的相关资料，总结整理了这篇文章，也算是纪念我的第一次java编程，如有错误，还望大家能够指出来，谢谢大家。 二">
-<meta name="twitter:image" content="http://yoursite.com/2019/09/05/leetcode21/E:%5Cblog%5Csource_posts%5Cleetcode21%5C1567603163016.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2019/09/05/leetcode21/1567603163016.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -139,7 +139,8 @@
 <p>空间复杂度：O（m+n)</p>
 <p>其中m、n为链表l1和l2的元素个数。</p>
 <h3 id="3-2-非递归"><a href="#3-2-非递归" class="headerlink" title="3.2 非递归"></a>3.2 非递归</h3><p>​        此题也可以用迭代的方法来解决，我们需要设置一个哨兵节点“prehead”来返回合并后的链表，并不断调整prev节点的next指针，每次进行比较之后next指针都指向较小的节点。并且每次比较完后prev指针都需要往后移动一位，循环终止时，需要判断l1和l2哪一个是非空的，prev指针指向非空链表。最后再返回哨兵节点“prehead”指向的链表。和上面一样我们使用图示来帮助你理解。</p>
-<p><img src="/2019/09/05/leetcode21/E:%5Cblog%5Csource_posts%5Cleetcode21%5C1567603163016.jpg" alt="1567603163016"></p>
+<img src="/2019/09/05/leetcode21/1567603163016.jpg" alt="迭代过程" style="zoom:80%;">
+
 <p> 图中prev前的序号表示prev指针移动顺序。</p>
 <p>最终得到的结果为：1-&gt;2-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6</p>
 <p>程序代码如下：</p>
