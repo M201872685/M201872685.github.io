@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/03/hust2019/">hust2019</a>
+      <a class="article-title" href="/2019/09/03/hust2019/">Java小白初编程</a>
     </h1>
   
 
@@ -84,17 +84,74 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>华中科技大学（Huazhong University of Science and Technology），简称华中大，是一所位于湖北省武汉市的中国顶尖综合研究型大学，学校前身为1952年设立的<a href="https://baike.so.com/doc/6403872-6617534.html" target="_blank" rel="noopener">华中工学院</a>、1907年德国医师<a href="https://baike.so.com/doc/6275443-6488875.html" target="_blank" rel="noopener">埃里希·宝隆</a>博士创立的<a href="https://baike.so.com/doc/2144907-2269487.html" target="_blank" rel="noopener">上海德文医学堂</a>以及1898年张之洞建立的<a href="https://baike.so.com/doc/465039-492426.html" target="_blank" rel="noopener">湖北工艺学堂</a>。2000年由华中理工大学、同济医科大学和武汉城市建设学院合并成立。 </p>
-<p>华中大是中华人民共和国教育部直属的综合性全国重点大学，中央直管副部级高校，国家首批“<a href="https://baike.so.com/doc/5363675-5599254.html" target="_blank" rel="noopener">985工程</a>”、“<a href="https://baike.so.com/doc/5352678-5588136.html" target="_blank" rel="noopener">211工程</a>”、“<a href="https://baike.so.com/doc/5356440-5591937.html" target="_blank" rel="noopener">2011计划</a>”重点建设高校，“卓越工程师教育培养计划”、“卓越医生教育培养计划”、“111计划”、“千人计划”入选高校，是21世纪学术联盟、中俄工科大学联盟、中欧工程教育平台、七校联合办学、国家海外高层次人才创新创业基地等成员，是与清华大学一同被美国制造工程师协会（SME）授予“大学领先奖”的两所中国大学之一。入选《Nature》评出的“中国十大科研机构”，被称作“新中国高等教育发展的缩影”。 </p>
-<p>截至2018年11月，学校占地7000余亩；设有45个学院，99个本科专业；专任教师3400余人，教师中有院士17人；有202个硕士学位授权点，189个博士学位授权点，39个博士后科研流动站；设有8所附属三级甲等医院。</p>
+        <h1 id="【Java】力扣（21）合并两个有序链表"><a href="#【Java】力扣（21）合并两个有序链表" class="headerlink" title="【Java】力扣（21）合并两个有序链表"></a>【Java】力扣（21）合并两个有序链表</h1><h2 id="一-简要说明"><a href="#一-简要说明" class="headerlink" title="一. 简要说明"></a>一. 简要说明</h2><p>​        本文是作者在力扣上面遇到的一个题，题目其实很简单，由于我是一个初学者，所以做起来还是有点吃力，看官方的答案也看了好久才看懂。但是官方给的代码都是不完整的，只有程序中最关键的算法实现部分的代码。我结合官方的解答以及网上查的相关资料，总结整理了这篇文章，也算是纪念我的第一次java编程，如有错误，还望大家能够指出来，谢谢大家。</p>
+<h2 id="二-题目"><a href="#二-题目" class="headerlink" title="二. 题目"></a>二. 题目</h2><p>​       题目是来源于力扣题库中的第21题：合并两个有序链表，代码采用java语言。</p>
+<h2 id="三-解题思路"><a href="#三-解题思路" class="headerlink" title="三. 解题思路"></a>三. 解题思路</h2><p>​       要解决该问题，我尝试了三种方法，分别是递归、非递归、迭代。</p>
+<h3 id="3-1-递归"><a href="#3-1-递归" class="headerlink" title="3.1 递归"></a>3.1 递归</h3><p>​        假设两个链表分别为l1和l2，毫无疑问，遇到一切问题，首先我们最先考虑的肯定是边界情况。如果l1或者l2一开始就是null，那么我们只要返回不是null的那个链表就可以了。否则，我们就开始比较l1和l2的头数据哪个更小，如果l1的头数据更小，则将l1的next指针指向下一次比较得到的结果；如果l2的头数据更小，则将l2的next指针指向下一次比较得到的结果。这里所说的下一次比较是比较l1当前的next指针指向的数据与l2当前的next指针指向的数据的大小，然后这样递归的决定下一个添加的值。或许看到这里你还不是很懂，觉得很抽象，那我按照算法的执行过程一步一步解释一下。</p>
+<table>
+<thead>
+<tr>
+<th align="center">l1</th>
+<th align="center">l1.next</th>
+<th align="center">(l1.next).next</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">5</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">l2</th>
+<th align="center">l2.next</th>
+<th align="center">(l2.next).next</th>
+<th align="center">((l2.next).next).next</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">2</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+<p>l1&lt;l2：确定最终输出的序列的头结点为l1；</p>
+<p>l2&lt;l1.next：l1.next-&gt;l2；</p>
+<p>l1.next&gt;l2.next：l2-&gt;next-&gt;l2.next；</p>
+<p>l1.next&gt;(l2.next).next：l2.next-&gt;next-&gt;(l2.next).next；</p>
+<p>l1.next&lt;((l2.next).next).next：(l2.next).next-&gt;next-&gt;l1.next；</p>
+<p>(l1.next).next&lt;((l2.next).next).next：l1.next-&gt;next-&gt;(l1.next).next</p>
+<p>l1=null：(l1.next).next-&gt;((l2.next).next).next；</p>
+<p>递归结束：return l1;</p>
+<p>最终得到的结果为：1-&gt;2-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6</p>
+<p>程序代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.List;</span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> val;</span><br><span class="line">  Node next;</span><br><span class="line">  Node(<span class="keyword">int</span> x)&#123;val=x;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Node <span class="title">mergeTwoLists</span><span class="params">(Node l1, Node l2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (l1 == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (l2 == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (l1.val &lt; l2.val) &#123;</span><br><span class="line">            l1.next = mergeTwoLists(l1.next, l2);</span><br><span class="line">            <span class="keyword">return</span> l1;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            l2.next = mergeTwoLists(l1, l2.next);</span><br><span class="line">            <span class="keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution6</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Node node1 = <span class="keyword">new</span> Node(<span class="number">1</span>);</span><br><span class="line">        Node node2 = <span class="keyword">new</span> Node(<span class="number">2</span>);</span><br><span class="line">        Node node3 = <span class="keyword">new</span> Node(<span class="number">4</span>);</span><br><span class="line">        Node node4 = <span class="keyword">new</span> Node(<span class="number">2</span>);</span><br><span class="line">        Node node5 = <span class="keyword">new</span> Node(<span class="number">5</span>);</span><br><span class="line">        Node node6 = <span class="keyword">new</span> Node(<span class="number">3</span>);</span><br><span class="line">        Node node7 = <span class="keyword">new</span> Node(<span class="number">6</span>);</span><br><span class="line">        Solution num = <span class="keyword">new</span> Solution();</span><br><span class="line">        node1.next = node3;</span><br><span class="line">        node3.next = node5;</span><br><span class="line">        node2.next = node4;</span><br><span class="line">        node4.next = node6;</span><br><span class="line">        node6.next = node7;</span><br><span class="line">        Node node = num.mergeTwoLists(node1, node2);</span><br><span class="line">        <span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(node.val + <span class="string">" "</span>);</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度：O（m+n)</p>
+<p>空间复杂度：O（m+n)</p>
+<p>其中m、n为链表l1和l2的元素个数。</p>
+<h3 id="3-2-非递归"><a href="#3-2-非递归" class="headerlink" title="3.2 非递归"></a>3.2 非递归</h3><p>​        此题也可以用迭代的方法来解决，我们需要设置一个哨兵节点“prehead”来返回合并后的链表，并不断调整prev节点的next指针，每次进行比较之后next指针都指向较小的节点。并且每次比较完后prev指针都需要往后移动一位，循环终止时，需要判断l1和l2哪一个是非空的，prev指针指向非空链表。最后再返回哨兵节点“prehead”指向的链表。和上面一样我们使用图示来帮助你理解。</p>
+<p> <img src="/2019/09/03/hust2019/E:%5Cblog%5Csource_posts%5Chust2019%5C1567647104862.png" alt="1567647104862"></p>
+<p> 图中prev前的序号表示prev指针移动顺序。</p>
+<p>最终得到的结果为：1-&gt;2-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6</p>
+<p>程序代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.awt.List;</span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> val;</span><br><span class="line">  Node next;</span><br><span class="line">  Node(<span class="keyword">int</span> x)&#123;val=x;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Node <span class="title">mergeTwoLists</span><span class="params">(Node l1, Node l2)</span> </span>&#123;</span><br><span class="line">        Node prehead = <span class="keyword">new</span> Node(-<span class="number">1</span>);</span><br><span class="line">        Node prev = prehead;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="keyword">null</span> &amp;&amp; l2 != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (l1.val &lt;= l2.val) &#123;</span><br><span class="line">                prev.next = l1;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                prev.next = l2;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">            prev = prev.next;</span><br><span class="line">        &#125;</span><br><span class="line">        prev.next = l1 == <span class="keyword">null</span> ? l2 : l1;</span><br><span class="line">        <span class="keyword">return</span> prehead.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution6</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Node node1 = <span class="keyword">new</span> Node(<span class="number">1</span>);</span><br><span class="line">        Node node2 = <span class="keyword">new</span> Node(<span class="number">2</span>);</span><br><span class="line">        Node node3 = <span class="keyword">new</span> Node(<span class="number">4</span>);</span><br><span class="line">        Node node4 = <span class="keyword">new</span> Node(<span class="number">2</span>);</span><br><span class="line">        Node node5 = <span class="keyword">new</span> Node(<span class="number">5</span>);</span><br><span class="line">        Node node6 = <span class="keyword">new</span> Node(<span class="number">3</span>);</span><br><span class="line">        Node node7 = <span class="keyword">new</span> Node(<span class="number">6</span>);</span><br><span class="line">        Solution num = <span class="keyword">new</span> Solution();</span><br><span class="line">        node1.next = node3;</span><br><span class="line">        node3.next = node5;</span><br><span class="line">        node2.next = node4;</span><br><span class="line">        node4.next = node6;</span><br><span class="line">        node6.next = node7;</span><br><span class="line">        Node node = num.mergeTwoLists(node1, node2);</span><br><span class="line">        <span class="keyword">while</span> (node != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.print(node.val + <span class="string">" "</span>);</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度：O（m+n)</p>
+<p>空间复杂度：O（1）</p>
+<h2 id="四-心得体会"><a href="#四-心得体会" class="headerlink" title="四. 心得体会"></a>四. 心得体会</h2><p>​        这是我第一次自己尝试着编写java程序，虽然过程很艰难，也没有完全靠自己编写程序，但是我从官方的解答以及他人的解题思路中学到了很多有用的知识。对于我这种小白来说，这样的过程还会持续很长一段时间，总结他人的算法与程序，比较每种算法的优劣，直到最后能够自己写出性能最优的程序为止。</p>
+<p>​        路漫漫其修远兮，吾将上下而求索。编程的道路漫长而曲折，需要不断的积累和实践才能学好编程，只有在不断的试错与调试过程中才能进步。当然，仅仅会编程是远远不够的，也就是说，你的算法除了能够实现所有功能外还要选择效率最高，时间和空间复杂度最低的算法来编写一个程序，往往这是判断一个程序好坏的标准，当然对于我来说这都是后话了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/03/hust2019/" data-id="ck03j42oz0005k4vg9i4ytn9t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/03/hust2019/" data-id="ck060y5ss0000rovgbv5efpci" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/华中科技大学2019/">华中科技大学2019</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/【1】合并两个有序链表/">【1】合并两个有序链表</a></li></ul>
 
     </footer>
   </div>
@@ -116,7 +173,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/华中科技大学2019/">华中科技大学2019</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/【1】合并两个有序链表/">【1】合并两个有序链表</a></li></ul>
     </div>
   </div>
 
@@ -126,7 +183,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/华中科技大学2019/" style="font-size: 10px;">华中科技大学2019</a>
+      <a href="/tags/【1】合并两个有序链表/" style="font-size: 10px;">【1】合并两个有序链表</a>
     </div>
   </div>
 
@@ -148,7 +205,7 @@
       <ul>
         
           <li>
-            <a href="/2019/09/03/hust2019/">hust2019</a>
+            <a href="/2019/09/03/hust2019/">Java小白初编程</a>
           </li>
         
       </ul>
