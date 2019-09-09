@@ -260,7 +260,7 @@
 <h2 id="1-1-先序遍历"><a href="#1-1-先序遍历" class="headerlink" title="1.1 先序遍历"></a>1.1 先序遍历</h2><p>在先序遍历中，首先访问根节点，然后再访问其左右子节点。由于树可以用递归来定义，所以树的常见操作也用递归来实现。递归实现的代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrderTraversal</span><span class="params">(BinTree BT)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( BT ) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(“%d\n”, BT-&gt;Data);        <span class="comment">//对节点做些访问比如打印         </span></span><br><span class="line">        PreOrderTraversal(BT-&gt;Left);     <span class="comment">//访问左儿子</span></span><br><span class="line">        PreOrderTraversal(BT-&gt;Right);    <span class="comment">//访问右儿子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>当数据规模较大时，这种递归的方式会占用大量的存储空间，容易越出栈空间。因此使用非递归先序遍历算法，基本思路是使用堆栈，先访问（打印）根节点，然后再将根节点的所有左节点压入堆栈，之后弹出根节点，转向根节点的右子树，重复之前的操作指导栈为空或者树中无节点为止。实现代码如下：</p>
+<p>当数据规模较大时，这种递归的方式会占用大量的存储空间，容易越出栈空间。因此使用非递归先序遍历算法，基本思路是使用堆栈，先访问（打印）根节点，然后再将根节点的所有左节点压入堆栈，之后弹出根节点，转向根节点的右子树，重复之前的操作直到栈为空或者树中无节点为止。实现代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrderTraversal</span><span class="params">(BinTree BT)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    BinTree T = BT;</span><br><span class="line">    Stack S = CreatStack(MAX_SIZE);    <span class="comment">//创建并初始化堆栈S</span></span><br><span class="line">    <span class="keyword">while</span>(T || !IsEmpty(S))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(T)        <span class="comment">//一直向左并将沿途节点访问（打印）后压入堆栈 </span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, T-&gt;Data);</span><br><span class="line">            Push(S, T);</span><br><span class="line">            T = T-&gt;Left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!IsEmpty(S))</span><br><span class="line">        &#123;</span><br><span class="line">            T = Pop(S);    <span class="comment">//节点弹出堆栈</span></span><br><span class="line">            T = T-&gt;Right;  <span class="comment">//转向右子树</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="1-2-中序遍历"><a href="#1-2-中序遍历" class="headerlink" title="1.2 中序遍历"></a>1.2 中序遍历</h2><p>中序遍历的思想和先序遍历的思想差不多，中序遍历先遍历左子树，再访问根节点，最后遍历右子树。递归实现的代码如下：</p>
@@ -306,14 +306,14 @@
 
 <p>最后输出结果：3</p>
 <h2 id="2-5-结果分析"><a href="#2-5-结果分析" class="headerlink" title="2.5 结果分析"></a>2.5 结果分析</h2><p>为什么是3呢？我们分析一下这个程序，首先node111和node112这两个节点都是没有左右子树的，他们的值分别为1和2，node11这个节点的左右子树分别为node111和node112，该子二叉树的值为3，node12没有左右子树并且node1节点的左右子树分别为node11和node12，所有我们画个图分析一下就知道，整个二叉树的左子树和为node11子树的值。图示如下：</p>
-<img src="/2019/09/07/leetcode27/Users\Administrator\AppData\Roaming\Typora\typora-user-images\1567929273796.png" alt="1567929273796" style="zoom:67%;">
+<div align="center">
+<img src="/2019/09/07/leetcode27/1568012634270.png" width="50%">
 
-
-
+<p>​    </p>
 <p>本文转载至：</p>
 <p><a href="https://www.cnblogs.com/crazylqy/p/7688665.html" target="_blank" rel="noopener">https://www.cnblogs.com/crazylqy/p/7688665.html</a></p>
 <p><a href="https://www.cnblogs.com/llhthinker/p/4747962.html" target="_blank" rel="noopener">https://www.cnblogs.com/llhthinker/p/4747962.html</a></p>
-
+</div>
       
 
       
