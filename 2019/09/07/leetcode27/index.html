@@ -17,7 +17,7 @@
 <meta property="og:description" content="一. C语言实现二叉树的遍历二叉树是一种基本的数据结构，是一种每个节点的子节点数目不多于2的树。关于二叉树的节点声明如下： 12345678typedef struct TreeNode *PtrToNode;typedef struct TreeNode *BinTree;struct TreeNode&amp;#123;    int Data;    //为简单起见，不妨假设树节点的元素为int型">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/2019/09/07/leetcode27/1568012634270.png">
-<meta property="og:updated_time" content="2019-09-09T07:19:43.588Z">
+<meta property="og:updated_time" content="2019-09-09T07:36:25.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="二叉树遍历">
 <meta name="twitter:description" content="一. C语言实现二叉树的遍历二叉树是一种基本的数据结构，是一种每个节点的子节点数目不多于2的树。关于二叉树的节点声明如下： 12345678typedef struct TreeNode *PtrToNode;typedef struct TreeNode *BinTree;struct TreeNode&amp;#123;    int Data;    //为简单起见，不妨假设树节点的元素为int型">
@@ -230,8 +230,12 @@
 
 <p>最后输出结果：3</p>
 <h2 id="2-5-结果分析"><a href="#2-5-结果分析" class="headerlink" title="2.5 结果分析"></a>2.5 结果分析</h2><p>为什么是3呢？我们分析一下这个程序，首先node111和node112这两个节点都是没有左右子树的，他们的值分别为1和2，node11这个节点的左右子树分别为node111和node112，该子二叉树的值为3，node12没有左右子树并且node1节点的左右子树分别为node11和node12，所有我们画个图分析一下就知道，整个二叉树的左子树和为node11子树的值。图示如下：</p>
-<div align="center">
-<img src="/2019/09/07/leetcode27/1568012634270.png" pic_center="30x30" width="50%"> 
+<div>
+ <div align="center">
+ <img src="/2019/09/07/leetcode27/1568012634270.png" width="400" height="300">    
+</div> 
+
+
 
 
 
