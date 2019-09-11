@@ -152,6 +152,122 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-string" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/11/string/">leetcode28</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/11/string/" class="archive-article-date">
+  	<time datetime="2019-09-11T03:37:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="子字符串查找方法"><a href="#子字符串查找方法" class="headerlink" title="子字符串查找方法"></a>子字符串查找方法</h1><h2 id="indexOf（）的使用方法"><a href="#indexOf（）的使用方法" class="headerlink" title="indexOf（）的使用方法"></a>indexOf（）的使用方法</h2><p>Java中字符串中子串的查找共有四种方法，如下：</p>
+<ol>
+<li>int indexOf(String str)：返回第一次出现的指定子字符串在此字符串中的索引。</li>
+<li>int indexOf(String str,int startIndex)：从指定的索引处开始，返回第一次出现的指定子字符串在此字符串中的索引。</li>
+<li>int lastIndexOf(String str)：返回在此字符串中最右边出现的指定子字符串的索引。</li>
+<li>int lastIndexOf(String str,int startIndex)：从指定的索引处开始向后搜索，返回在此字符串中最后一次出现的指定子字符串的索引。</li>
+</ol>
+<p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        String s = <span class="string">"xXccxxxXX"</span>;           </span><br><span class="line">        System.out.println(s.indexOf(<span class="string">"c"</span>));     </span><br><span class="line">        System.out.println(s.indexOf(<span class="string">"c"</span>, <span class="number">3</span>));     </span><br><span class="line">        System.out.println(s.indexOf(<span class="string">"y"</span>));     </span><br><span class="line">        System.out.println(s.lastIndexOf(<span class="string">"x"</span>));   </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="利用substring（）方法"><a href="#利用substring（）方法" class="headerlink" title="利用substring（）方法"></a>利用substring（）方法</h2><p>substring()方法用于提取字符串中介于两个指定下表之间的字符。其语法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringObject.substring(start,stop)</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">start</td>
+<td style="text-align:left">必需。一个非负的整数，规定要提取的子串的第一个字符在 stringObject 中的位置。</td>
+</tr>
+<tr>
+<td style="text-align:left">stop</td>
+<td style="text-align:left">可选。一个非负的整数，比要提取的子串的最后一个字符在 stringObject 中的位置多 1。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>该函数返回一个新的字符串，该字符串值包含 <em>stringObject</em> 的一个子字符串，其内容是从 <em>start</em> 处到 <em>stop</em>-1 处的所有字符，其长度为 <em>stop</em>减 <em>start</em>。</p>
+<p><strong>说明：substring() 方法返回的子串包括 <em>start</em> 处的字符，但不包括 <em>stop</em> 处的字符。如果参数 <em>start</em> 与 <em>stop</em> 相等，那么该方法返回的就是一个空串（即长度为 0 的字符串）。如果 <em>start</em> 比 <em>stop</em> 大，那么该方法在提取子串之前会先交换这两个参数。</strong></p>
+<p><strong>注：与 <a href="https://www.w3school.com.cn/jsref/jsref_slice_string.asp" target="_blank" rel="noopener">slice()</a> 和 <a href="https://www.w3school.com.cn/jsref/jsref_substr.asp" target="_blank" rel="noopener">substr()</a> 方法不同的是，substring() 不接受负的参数。</strong></p>
+<h2 id="典型例题"><a href="#典型例题" class="headerlink" title="典型例题"></a>典型例题</h2><p>例题来源于leetcode28题。</p>
+<p>题目描述：给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。</p>
+<p>应用substring方法的代码实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">strStr</span><span class="params">(String haystack, String needle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> len = needle.length();</span><br><span class="line">        <span class="keyword">int</span> lenhay = haystack.length();</span><br><span class="line">        <span class="keyword">if</span> ( lenhay &lt; len )</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> star = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">int</span> end = len-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (end &lt; lenhay)&#123;</span><br><span class="line">             <span class="keyword">if</span> (haystack.substring(star,end+<span class="number">1</span>).equals(needle))&#123;</span><br><span class="line">                 <span class="keyword">return</span> star;</span><br><span class="line">             &#125;</span><br><span class="line">            end++;</span><br><span class="line">            star++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution12</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    Solution num = <span class="keyword">new</span> Solution();</span><br><span class="line">    String a = <span class="string">"beautiful"</span>;</span><br><span class="line">    String b = <span class="string">"ti"</span>;</span><br><span class="line">    <span class="keyword">int</span> i = num.strStr(a,b);</span><br><span class="line">    System.out.println(<span class="string">"子串在主串中的序号为："</span>+i);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<blockquote>
+<p>子串在主串中的序号为：4</p>
+</blockquote>
+<p>链接：<a href="https://leetcode-cn.com/problems/implement-strstr" target="_blank" rel="noopener">https://leetcode-cn.com/problems/implement-strstr</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">【3】匹配字符串</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/11/string/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-dynamic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -839,6 +955,10 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">【3】匹配字符串</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">二叉树构建</a>
               </li>
              
@@ -1000,21 +1120,5 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
