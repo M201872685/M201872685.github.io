@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>矩阵连乘最小次数问题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="动态规划法求解矩阵链相乘的最少乘积次数问题一. 问题描述已知矩阵A~k~，k=1,2,…,n，其大小分别为p0$$p1，p1$$p2，…，pn-1$$pn，定义矩阵链积A~1~$$A~2~$$…A~n~为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是 M~1~:  \begin{matrix}     1 &amp; 1\\     1 &amp; 1\\">
+  <meta name="description" content="动态规划法求解矩阵链相乘的最少乘积次数问题一. 问题描述已知矩阵Ak，k=1,2,…,n，其大小分别为(p0,p1)，(p1,p2)，…，(pn-1,pn)，定义矩阵链积A1A2…An为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是 M1:  \begin{matrix}     1 &amp; 1\\     1 &amp; 1\\     1 &amp; 1\\">
 <meta name="keywords" content="一道公司笔试题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="矩阵连乘最小次数问题">
 <meta property="og:url" content="http://yoursite.com/2019/09/11/dynamic/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="动态规划法求解矩阵链相乘的最少乘积次数问题一. 问题描述已知矩阵A~k~，k=1,2,…,n，其大小分别为p0$$p1，p1$$p2，…，pn-1$$pn，定义矩阵链积A~1~$$A~2~$$…A~n~为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是 M~1~:  \begin{matrix}     1 &amp; 1\\     1 &amp; 1\\">
+<meta property="og:description" content="动态规划法求解矩阵链相乘的最少乘积次数问题一. 问题描述已知矩阵Ak，k=1,2,…,n，其大小分别为(p0,p1)，(p1,p2)，…，(pn-1,pn)，定义矩阵链积A1A2…An为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是 M1:  \begin{matrix}     1 &amp; 1\\     1 &amp; 1\\     1 &amp; 1\\">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-11T03:00:54.721Z">
+<meta property="og:updated_time" content="2019-09-11T03:25:21.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="矩阵连乘最小次数问题">
-<meta name="twitter:description" content="动态规划法求解矩阵链相乘的最少乘积次数问题一. 问题描述已知矩阵A~k~，k=1,2,…,n，其大小分别为p0$$p1，p1$$p2，…，pn-1$$pn，定义矩阵链积A~1~$$A~2~$$…A~n~为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是 M~1~:  \begin{matrix}     1 &amp; 1\\     1 &amp; 1\\">
+<meta name="twitter:description" content="动态规划法求解矩阵链相乘的最少乘积次数问题一. 问题描述已知矩阵Ak，k=1,2,…,n，其大小分别为(p0,p1)，(p1,p2)，…，(pn-1,pn)，定义矩阵链积A1A2…An为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是 M1:  \begin{matrix}     1 &amp; 1\\     1 &amp; 1\\     1 &amp; 1\\">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -175,8 +175,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="动态规划法求解矩阵链相乘的最少乘积次数问题"><a href="#动态规划法求解矩阵链相乘的最少乘积次数问题" class="headerlink" title="动态规划法求解矩阵链相乘的最少乘积次数问题"></a>动态规划法求解矩阵链相乘的最少乘积次数问题</h1><h2 id="一-问题描述"><a href="#一-问题描述" class="headerlink" title="一. 问题描述"></a>一. 问题描述</h2><p>已知矩阵A~k~，k=1,2,…,n，其大小分别为p0$<em>$p1，p1$</em>$p2，…，pn-1$<em>$pn，定义矩阵链积A~1~$</em>$A~2~$<em>$…</em>A~n~为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是</p>
-<p>M~1~:</p>
+        <h1 id="动态规划法求解矩阵链相乘的最少乘积次数问题"><a href="#动态规划法求解矩阵链相乘的最少乘积次数问题" class="headerlink" title="动态规划法求解矩阵链相乘的最少乘积次数问题"></a>动态规划法求解矩阵链相乘的最少乘积次数问题</h1><h2 id="一-问题描述"><a href="#一-问题描述" class="headerlink" title="一. 问题描述"></a>一. 问题描述</h2><p>已知矩阵Ak，k=1,2,…,n，其大小分别为(p0,p1)，(p1,p2)，…，(pn-1,pn)，定义矩阵链积A1A2…An为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是</p>
+<p>M1:</p>
 <script type="math/tex; mode=display">
 \begin{matrix}
     1 & 1\\
@@ -184,25 +184,29 @@
     1 & 1\\
     1 & 1\\
     1 & 1\\
-    \end{matrix}</script><p>M~2~:</p>
+    \end{matrix}</script><p>M2:</p>
 <script type="math/tex; mode=display">
 \begin{matrix}
     1 & 1 & 1 & 1\\
     1 & 1 & 1 & 1\\
-    \end{matrix}</script><p>M~3~:</p>
+    \end{matrix}</script><p>M3:</p>
 <script type="math/tex; mode=display">
 \begin{matrix}
     1 & 1 & 1\\
     1 & 1 & 1\\
     1 & 1 & 1\\
     1 & 1 & 1\\
-    \end{matrix}</script><p>简单来说，就是要求一种最佳的分解方法。使得矩阵M~1~$<em>$M~2~$</em>$M~3~最后在乘法上的计算次数最少。</p>
+    \end{matrix}</script><p>简单来说，就是要求一种最佳的分解方法。使得矩阵M1M2M3最后在乘法上的计算次数最少。</p>
 <p>在上述例子中，三个矩阵相乘，我们都知道只有两种乘法：</p>
 <ol>
-<li>（M~1~M~2~)M~3~，即先将前面两个矩阵相乘，然后再乘以第三个矩阵；</li>
-<li>M~1~（M~2~M~3~），即先将第二个和第三个矩阵相乘，然后再乘以第一个矩阵。</li>
+<li>(M1 M2) M3，即先将前面两个矩阵相乘，然后再乘以第三个矩阵；</li>
+<li>M1 (M2 M3)，即先将第二个和第三个矩阵相乘，然后再乘以第一个矩阵。</li>
 </ol>
-<p>对于第一种情况需要进行的乘积次数为5$<em>$2$</em>$4+5$<em>$4$</em>$3=100，对于第二种情况需要进行的乘积次数为2$<em>$4$</em>$3+5$<em>$2$</em>$3=54，很明显，第二种方法比第一种方法进行的乘积次数要少。</p>
+<p>对于第一种情况需要进行的乘积次数为:</p>
+<script type="math/tex; mode=display">
+5*2*4+5*4*3=100</script><p>对于第二种情况需要进行的乘积次数为:</p>
+<script type="math/tex; mode=display">
+2*4*3+5*2*3=54</script><p>很明显，第二种方法比第一种方法进行的乘积次数要少。</p>
 <h2 id="二-解题思路"><a href="#二-解题思路" class="headerlink" title="二. 解题思路"></a>二. 解题思路</h2><p>首先，我们需要先了解什么叫动态规划，先来看看动态规划的四个步骤：</p>
 <ol>
 <li>找出最优解的性质，并且刻画其结构特性；</li>
@@ -211,11 +215,11 @@
 <li>根据计算最优值的时候得到的信息，构造最优解</li>
 </ol>
 <p>其中有一种改进的动态规划算法：备忘录法，是以自顶向下的方式刻画最优值。下面介绍动态规划法和备忘录法的代码实现。</p>
-<h3 id="2-1-动态规划法"><a href="#2-1-动态规划法" class="headerlink" title="2.1 动态规划法"></a>2.1 动态规划法</h3><p>对于矩阵链积A~1~$<em>$A~2~$</em>$…*A~n~，我们假设使得其乘积最少的次数为C[i:j]，去k$\in$（i,j]，将上边的矩阵链积在k的位置分隔开，得到（A~1~A~2~…A~k-1~）（A~k~…A~n~）。此时可知，</p>
+<h3 id="2-1-动态规划法"><a href="#2-1-动态规划法" class="headerlink" title="2.1 动态规划法"></a>2.1 动态规划法</h3><p>对于矩阵链积A1 A2 … An，我们假设使得其乘积最少的次数为C[i:j]，去i&lt;k&lt;=j，将上边的矩阵链积在k的位置分隔开，得到（A1 A2 … Ak-1）（Ak … An）。此时可知，</p>
 <ul>
 <li>对于前面一个子链积来说，其乘积的最少次数为C[1,k-1]；对于后面的子链积，其乘积的最少次数为C[k,n]。</li>
-<li>前一个子链积的结果是一个r~1~$<em>$r~k~的矩阵N~1~（其中，r~1~表示A~1~的行数，r~k~表示A~k~的行数，也就是A~k-1~的列数）；后一个子链积的结果是一个r~k~$</em>$r~n+1~的矩阵N~2~（其中，r~k~表示A~k~的行数，r~n+1~表示A~n~的列数）；然后计算N~1~N~2~的乘积次数，其次数为（r~1~$<em>$r~k~$</em>$r~n+1~）。所以，这样分割的情况下成绩的总次数为num=（C[1,k-1]+C[k,n]+(r~1~$<em>$r~k~$</em>$r~n+1~)）</li>
-<li>所以，经过上面的分析我们有，<strong>C[i,j]=min{C[1,k-1]+C[k,n]+(r~1~$<em>$r~k~$</em>$r~n+1~)}</strong></li>
+<li>前一个子链积的结果是一个(r1,rk)的矩阵N1（其中，r1表示A1的行数，rk表示Ak的行数，也就是A(k-1)的列数）；后一个子链积的结果是一个(rk,r(n+1))的矩阵N2（其中，rk表示Ak的行数，r(n+1)表示An的列数）；然后计算N1N2的乘积次数，其次数为（r1 rk r(n+1)​）。所以，这样分割的情况下成绩的总次数为num=（C[1,k-1]+C[k,n]+(r1 rk r(n+1)）​)</li>
+<li>所以，经过上面的分析我们有，C[i,j]=min{C[1,k-1]+C[k,n]+(r1 rk r(n+1))}​</li>
 </ul>
 <p>上式加粗的式子便是这个问题用动态规划方法求解的递推式子。</p>
 <p>下面是使用动态规划算法求解矩阵链积问题的java实现：</p>
@@ -481,6 +485,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">【1】合并两个有序链表</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">【2】删除排序数组中的重复项</a>
               </li>
              
@@ -489,15 +497,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">【1】合并两个有序链表</a>
+                <a href="javascript:void(0)" class="js-tag color1">二叉树构建</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">一道公司笔试题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">二叉树构建</a>
               </li>
             
             <div class="clearfix"></div>
