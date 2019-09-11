@@ -152,6 +152,132 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-dynamic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/11/dynamic/">矩阵连乘最小次数问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/11/dynamic/" class="archive-article-date">
+  	<time datetime="2019-09-11T02:46:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="动态规划法求解矩阵链相乘的最少乘积次数问题"><a href="#动态规划法求解矩阵链相乘的最少乘积次数问题" class="headerlink" title="动态规划法求解矩阵链相乘的最少乘积次数问题"></a>动态规划法求解矩阵链相乘的最少乘积次数问题</h1><h2 id="一-问题描述"><a href="#一-问题描述" class="headerlink" title="一. 问题描述"></a>一. 问题描述</h2><p>已知矩阵A~k~，k=1,2,…,n，其大小分别为p0$<em>$p1，p1$</em>$p2，…，pn-1$<em>$pn，定义矩阵链积A~1~$</em>$A~2~$<em>$…</em>A~n~为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是</p>
+<p>M~1~:</p>
+<script type="math/tex; mode=display">
+\begin{matrix}
+    1 & 1\\
+    1 & 1\\
+    1 & 1\\
+    1 & 1\\
+    1 & 1\\
+    \end{matrix}</script><p>M~2~:</p>
+<script type="math/tex; mode=display">
+\begin{matrix}
+    1 & 1 & 1 & 1\\
+    1 & 1 & 1 & 1\\
+    \end{matrix}</script><p>M~3~:</p>
+<script type="math/tex; mode=display">
+\begin{matrix}
+    1 & 1 & 1\\
+    1 & 1 & 1\\
+    1 & 1 & 1\\
+    1 & 1 & 1\\
+    \end{matrix}</script><p>简单来说，就是要求一种最佳的分解方法。使得矩阵M~1~$<em>$M~2~$</em>$M~3~最后在乘法上的计算次数最少。</p>
+<p>在上述例子中，三个矩阵相乘，我们都知道只有两种乘法：</p>
+<ol>
+<li>（M~1~M~2~)M~3~，即先将前面两个矩阵相乘，然后再乘以第三个矩阵；</li>
+<li>M~1~（M~2~M~3~），即先将第二个和第三个矩阵相乘，然后再乘以第一个矩阵。</li>
+</ol>
+<p>对于第一种情况需要进行的乘积次数为5$<em>$2$</em>$4+5$<em>$4$</em>$3=100，对于第二种情况需要进行的乘积次数为2$<em>$4$</em>$3+5$<em>$2$</em>$3=54，很明显，第二种方法比第一种方法进行的乘积次数要少。</p>
+<h2 id="二-解题思路"><a href="#二-解题思路" class="headerlink" title="二. 解题思路"></a>二. 解题思路</h2><p>首先，我们需要先了解什么叫动态规划，先来看看动态规划的四个步骤：</p>
+<ol>
+<li>找出最优解的性质，并且刻画其结构特性；</li>
+<li>递归的定义最优解；</li>
+<li>以自底向上的方式刻画最优值；</li>
+<li>根据计算最优值的时候得到的信息，构造最优解</li>
+</ol>
+<p>其中有一种改进的动态规划算法：备忘录法，是以自顶向下的方式刻画最优值。下面介绍动态规划法和备忘录法的代码实现。</p>
+<h3 id="2-1-动态规划法"><a href="#2-1-动态规划法" class="headerlink" title="2.1 动态规划法"></a>2.1 动态规划法</h3><p>对于矩阵链积A~1~$<em>$A~2~$</em>$…*A~n~，我们假设使得其乘积最少的次数为C[i:j]，去k$\in$（i,j]，将上边的矩阵链积在k的位置分隔开，得到（A~1~A~2~…A~k-1~）（A~k~…A~n~）。此时可知，</p>
+<ul>
+<li>对于前面一个子链积来说，其乘积的最少次数为C[1,k-1]；对于后面的子链积，其乘积的最少次数为C[k,n]。</li>
+<li>前一个子链积的结果是一个r~1~$<em>$r~k~的矩阵N~1~（其中，r~1~表示A~1~的行数，r~k~表示A~k~的行数，也就是A~k-1~的列数）；后一个子链积的结果是一个r~k~$</em>$r~n+1~的矩阵N~2~（其中，r~k~表示A~k~的行数，r~n+1~表示A~n~的列数）；然后计算N~1~N~2~的乘积次数，其次数为（r~1~$<em>$r~k~$</em>$r~n+1~）。所以，这样分割的情况下成绩的总次数为num=（C[1,k-1]+C[k,n]+(r~1~$<em>$r~k~$</em>$r~n+1~)）</li>
+<li>所以，经过上面的分析我们有，<strong>C[i,j]=min{C[1,k-1]+C[k,n]+(r~1~$<em>$r~k~$</em>$r~n+1~)}</strong></li>
+</ul>
+<p>上式加粗的式子便是这个问题用动态规划方法求解的递推式子。</p>
+<p>下面是使用动态规划算法求解矩阵链积问题的java实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Strassen</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * array[i][j]表示Ai...Aj相乘最少计算次数</span></span><br><span class="line"><span class="comment">     * s[i][j]=k,表示Ai...Aj这(j-i+1)个矩阵中最优子结构为Ai...Ak和A(k+1)...Aj</span></span><br><span class="line"><span class="comment">     * p[i]表示Ai的行数，p[i+1]表示Ai的列数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> array[][];</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> p[];</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> s[][];</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Strassen</span><span class="params">()</span></span>&#123;</span><br><span class="line">		p=<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">3</span>&#125;;</span><br><span class="line">		array=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>][<span class="number">4</span>];</span><br><span class="line">		s=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>][<span class="number">4</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Strassen</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> []p)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.p=<span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">this</span>.array=<span class="keyword">new</span> <span class="keyword">int</span>[n][n];</span><br><span class="line">		<span class="keyword">this</span>.s=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>][<span class="number">4</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;p.length;i++)</span><br><span class="line">			<span class="keyword">this</span>.p[i]=p[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*********************方法一，动态规划**********************************/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">martixChain</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n=array.length;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++) </span><br><span class="line">			array[i][i]=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> r=<span class="number">2</span>;r&lt;=n;r++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=n-r;i++)&#123;</span><br><span class="line">				<span class="keyword">int</span> j=i+r-<span class="number">1</span>;</span><br><span class="line">				array[i][j]=array[i+<span class="number">1</span>][j]+p[i]*p[i+<span class="number">1</span>]*p[j+<span class="number">1</span>];</span><br><span class="line">				s[i][j]=i;</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> k=i+<span class="number">1</span>;k&lt;j;k++)&#123;</span><br><span class="line">					<span class="keyword">int</span> t=array[i][k]+array[k+<span class="number">1</span>][j]+p[i]*p[k+<span class="number">1</span>]*p[j+<span class="number">1</span>];</span><br><span class="line">					<span class="keyword">if</span>(t&lt;array[i][j])&#123;</span><br><span class="line">						array[i][j]=t;</span><br><span class="line">						s[i][j]=k;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 如果待求矩阵为：Ap...Aq,then a=0,b=q-p</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">traceBack</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(a&lt;b)&#123;</span><br><span class="line">			traceBack(a, s[a][b]);</span><br><span class="line">			traceBack(s[a][b]+<span class="number">1</span>, b);</span><br><span class="line">			System.out.println(<span class="string">"先把A"</span>+a+<span class="string">"到A"</span>+s[a][b]+<span class="string">"括起来，在把A"</span>+(s[a][b]+<span class="number">1</span>)+<span class="string">"到A"</span>+b+<span class="string">"括起来，然后把A"</span>+a+<span class="string">"到A"</span>+b+<span class="string">"括起来"</span>);</span><br><span class="line">		  System.out.println(<span class="string">"最小乘积次数为："</span>+array[a][b]);</span><br><span class="line">    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Strassen strassen=<span class="keyword">new</span> Strassen();</span><br><span class="line">		strassen.martixChain();</span><br><span class="line">		strassen.traceBack(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终的结果为：</p>
+<blockquote>
+<p>先把A0到A0括起来，在把A1到A1括起来，然后把A0到A1括起来<br>最小乘积次数为：40<br>先把A0到A1括起来，在把A2到A2括起来，然后把A0到A2括起来<br>最小乘积次数为：90<br>先把A0到A2括起来，在把A3到A3括起来，然后把A0到A3括起来<br>最小乘积次数为：120</p>
+</blockquote>
+<h3 id="2-2-备忘录法"><a href="#2-2-备忘录法" class="headerlink" title="2.2 备忘录法"></a>2.2 备忘录法</h3><p>一般来讲，当一个问题的所有子问题都至少要解一次时，使用动态规划算法比使用备忘录方法好。此时，动态规划算法没有任何多余的计算。同时，对于许多问题，常常可以利用其规则的表格存取方式，减少动态规划算法的计算时间和空间需求。当子问题空间中的部分子问题可以不必求解时，使用备忘录方法则较为有利，因为从其控制结构可以看出，该方法只解那些确实需要求解的问题。</p>
+<p>实现代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Strassen</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * array[i][j]表示Ai...Aj相乘最少计算次数</span></span><br><span class="line"><span class="comment">     * s[i][j]=k,表示Ai...Aj这(j-i+1)个矩阵中最优子结构为Ai...Ak和A(k+1)...Aj</span></span><br><span class="line"><span class="comment">     * p[i]表示Ai的行数，p[i+1]表示Ai的列数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> array[][];</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> p[];</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> s[][];</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Strassen</span><span class="params">()</span></span>&#123;</span><br><span class="line">		p=<span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">2</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5</span>,<span class="number">3</span>&#125;;</span><br><span class="line">		array=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>][<span class="number">4</span>];</span><br><span class="line">		s=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>][<span class="number">4</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Strassen</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> []p)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.p=<span class="keyword">new</span> <span class="keyword">int</span>[n+<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">this</span>.array=<span class="keyword">new</span> <span class="keyword">int</span>[n][n];</span><br><span class="line">		<span class="keyword">this</span>.s=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>][<span class="number">4</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;p.length;i++)</span><br><span class="line">			<span class="keyword">this</span>.p[i]=p[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*********************方法二，备忘录方法**********************************/</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">memorizedMatrixChain</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n=array.length;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;n;j++)</span><br><span class="line">				array[i][j]=<span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> lookUpChain(<span class="number">0</span>,n-<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lookUpChain</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(array[a][b]!=<span class="number">0</span>)</span><br><span class="line">			<span class="keyword">return</span> array[a][b];</span><br><span class="line">		<span class="keyword">if</span>(a==b)</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		array[a][b]=lookUpChain(a, a)+lookUpChain(a+<span class="number">1</span>, b)+p[a]*p[a+<span class="number">1</span>]*p[b+<span class="number">1</span>];</span><br><span class="line">		s[a][b]=a;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k=a+<span class="number">1</span>;k&lt;b;k++)&#123;</span><br><span class="line">			<span class="keyword">int</span> t=lookUpChain(a, k)+lookUpChain(k+<span class="number">1</span>, b)+p[a]*p[k+<span class="number">1</span>]*p[b+<span class="number">1</span>];</span><br><span class="line">			<span class="keyword">if</span>(t&lt;array[a][b])&#123;</span><br><span class="line">				array[a][b]=t;</span><br><span class="line">				s[a][b]=k;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> array[a][b];</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">traceBack</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(a&lt;b)&#123;</span><br><span class="line">			traceBack(a, s[a][b]);</span><br><span class="line">			traceBack(s[a][b]+<span class="number">1</span>, b);</span><br><span class="line">			System.out.println(<span class="string">"先把A"</span>+a+<span class="string">"到A"</span>+s[a][b]+<span class="string">"括起来，在把A"</span>+(s[a][b]+<span class="number">1</span>)+<span class="string">"到A"</span>+b+<span class="string">"括起来，然后把A"</span>+a+<span class="string">"到A"</span>+b+<span class="string">"括起来"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Strassen strassen=<span class="keyword">new</span> Strassen();</span><br><span class="line">		<span class="keyword">int</span> num=strassen.memorizedMatrixChain();</span><br><span class="line">		strassen.traceBack(<span class="number">0</span>, <span class="number">3</span>);</span><br><span class="line">    System.out.println(<span class="string">"最小乘积次数为："</span>+num);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原文链接：<a href="https://blog.csdn.net/weiweiyixiaocsdn/article/details/45648647" target="_blank" rel="noopener">https://blog.csdn.net/weiweiyixiaocsdn/article/details/45648647</a><br>原文链接：<a href="https://blog.csdn.net/Adieu_csdn/article/details/83833676" target="_blank" rel="noopener">https://blog.csdn.net/Adieu_csdn/article/details/83833676</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">一道公司笔试题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/11/dynamic/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-robort" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -701,11 +827,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">二叉树构建</a>
+                <a href="javascript:void(0)" class="js-tag color2">【1】合并两个有序链表</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">【1】合并两个有序链表</a>
+                <a href="javascript:void(0)" class="js-tag color3">一道公司笔试题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">二叉树构建</a>
               </li>
             
             <div class="clearfix"></div>
