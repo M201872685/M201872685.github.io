@@ -159,7 +159,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/11/string/">leetcode28</a>
+      <a class="article-title" href="/2019/09/11/string/">java小白初编程</a>
     </h1>
   
 
@@ -228,7 +228,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">【3】匹配字符串</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">【3】字符串匹配问题</a>
         		</li>
       		
 		</ul>
@@ -288,8 +288,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="动态规划法求解矩阵链相乘的最少乘积次数问题"><a href="#动态规划法求解矩阵链相乘的最少乘积次数问题" class="headerlink" title="动态规划法求解矩阵链相乘的最少乘积次数问题"></a>动态规划法求解矩阵链相乘的最少乘积次数问题</h1><h2 id="一-问题描述"><a href="#一-问题描述" class="headerlink" title="一. 问题描述"></a>一. 问题描述</h2><p>已知矩阵Ak，k=1,2,…,n，其大小分别为(p0,p1)，(p1,p2)，…，(pn-1,pn)，定义矩阵链积A1A2…An为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是</p>
-<p>M1:</p>
+        <h1 id="动态规划法求解矩阵链相乘的最少乘积次数问题"><a href="#动态规划法求解矩阵链相乘的最少乘积次数问题" class="headerlink" title="动态规划法求解矩阵链相乘的最少乘积次数问题"></a>动态规划法求解矩阵链相乘的最少乘积次数问题</h1><h2 id="一-问题描述"><a href="#一-问题描述" class="headerlink" title="一. 问题描述"></a>一. 问题描述</h2><p>已知矩阵A$_k$，k=1,2,…,n，其大小分别为(p$_0$,p$_1$)，(p$_1$,p$_2$)，…，(p$_{n-1}$,p$_n$)，定义矩阵链积A$_1$$*$A$_2$…A$_n$为A[1:n]，计算矩阵链积所需要的最少乘积次数为C[i:j]。举例子来说：假设有三个矩阵，分别是</p>
+<p>M$_1$:</p>
 <script type="math/tex; mode=display">
 \begin{matrix}
     1 & 1\\
@@ -297,23 +297,23 @@
     1 & 1\\
     1 & 1\\
     1 & 1\\
-    \end{matrix}</script><p>M2:</p>
+    \end{matrix}</script><p>M$_2$:</p>
 <script type="math/tex; mode=display">
 \begin{matrix}
     1 & 1 & 1 & 1\\
     1 & 1 & 1 & 1\\
-    \end{matrix}</script><p>M3:</p>
+    \end{matrix}</script><p>M$_3$:</p>
 <script type="math/tex; mode=display">
 \begin{matrix}
     1 & 1 & 1\\
     1 & 1 & 1\\
     1 & 1 & 1\\
     1 & 1 & 1\\
-    \end{matrix}</script><p>简单来说，就是要求一种最佳的分解方法。使得矩阵M1M2M3最后在乘法上的计算次数最少。</p>
+    \end{matrix}</script><p>简单来说，就是要求一种最佳的分解方法。使得矩阵M$_1$M$_2$M$ _3$最后在乘法上的计算次数最少。</p>
 <p>在上述例子中，三个矩阵相乘，我们都知道只有两种乘法：</p>
 <ol>
-<li>(M1 M2) M3，即先将前面两个矩阵相乘，然后再乘以第三个矩阵；</li>
-<li>M1 (M2 M3)，即先将第二个和第三个矩阵相乘，然后再乘以第一个矩阵。</li>
+<li>(M$_1$M$_2$) M$_3$，即先将前面两个矩阵相乘，然后再乘以第三个矩阵；</li>
+<li>M$_1$(M$_2$M$_3$)，即先将第二个和第三个矩阵相乘，然后再乘以第一个矩阵。</li>
 </ol>
 <p>对于第一种情况需要进行的乘积次数为:</p>
 <script type="math/tex; mode=display">
@@ -328,11 +328,11 @@
 <li>根据计算最优值的时候得到的信息，构造最优解</li>
 </ol>
 <p>其中有一种改进的动态规划算法：备忘录法，是以自顶向下的方式刻画最优值。下面介绍动态规划法和备忘录法的代码实现。</p>
-<h3 id="2-1-动态规划法"><a href="#2-1-动态规划法" class="headerlink" title="2.1 动态规划法"></a>2.1 动态规划法</h3><p>对于矩阵链积A1 A2 … An，我们假设使得其乘积最少的次数为C[i:j]，去i&lt;k&lt;=j，将上边的矩阵链积在k的位置分隔开，得到（A1 A2 … Ak-1）（Ak … An）。此时可知，</p>
+<h3 id="2-1-动态规划法"><a href="#2-1-动态规划法" class="headerlink" title="2.1 动态规划法"></a>2.1 动态规划法</h3><p>对于矩阵链积A$_1$A$_2$…A$_n$，我们假设使得其乘积最少的次数为C[i:j]，去i&lt;k&lt;=j，将上边的矩阵链积在k的位置分隔开，得到（A$_1$A$_ 2$…A$_{k-1}$） （A$_k$…A$_n$） 。此时可知，</p>
 <ul>
 <li>对于前面一个子链积来说，其乘积的最少次数为C[1,k-1]；对于后面的子链积，其乘积的最少次数为C[k,n]。</li>
-<li>前一个子链积的结果是一个(r1,rk)的矩阵N1（其中，r1表示A1的行数，rk表示Ak的行数，也就是A(k-1)的列数）；后一个子链积的结果是一个(rk,r(n+1))的矩阵N2（其中，rk表示Ak的行数，r(n+1)表示An的列数）；然后计算N1N2的乘积次数，其次数为（r1 rk r(n+1)​）。所以，这样分割的情况下成绩的总次数为num=（C[1,k-1]+C[k,n]+(r1 rk r(n+1)）​)</li>
-<li>所以，经过上面的分析我们有，C[i,j]=min{C[1,k-1]+C[k,n]+(r1 rk r(n+1))}​</li>
+<li>前一个子链积的结果是一个(r$_1$,r$_k$)的矩阵N$_1$（其中，r$_1$表示A$_1$的行数，r$_k$表示A$_k$的行数，也就是A$_{k-1}$的列数）；后一个子链积的结果是一个(r$_k$,r$_{n+1}$)的矩阵N$_2$（其中，r$_k$表示A$_k$的行数，r$_{n+1}$表示A$_n$的列数）；然后计算N$_1$N$_2$的乘积次数，其次数为（r$_1$r$_k$r$_{n+1}$）。所以，这样分割的情况下成绩的总次数为num=(C[1,k-1]+C[k,n]+(r$_1$r$_k$r$_{n+1}$​))</li>
+<li>所以，经过上面的分析我们有，C[i,j]=min{C[1,k-1]+C[k,n]+(r$_1$r$_k$r$_{n+1}$)}</li>
 </ul>
 <p>上式加粗的式子便是这个问题用动态规划方法求解的递推式子。</p>
 <p>下面是使用动态规划算法求解矩阵链积问题的java实现：</p>
@@ -955,7 +955,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">【3】匹配字符串</a>
+                <a href="javascript:void(0)" class="js-tag color1">【3】字符串匹配问题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1120,5 +1120,21 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
