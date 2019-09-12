@@ -830,8 +830,10 @@
 <h3 id="3-2-非递归"><a href="#3-2-非递归" class="headerlink" title="3.2 非递归"></a>3.2 非递归</h3><p>​        此题也可以用迭代的方法来解决，我们需要设置一个哨兵节点“prehead”来返回合并后的链表，并不断调整prev节点的next指针，每次进行比较之后next指针都指向较小的节点。并且每次比较完后prev指针都需要往后移动一位，循环终止时，需要判断l1和l2哪一个是非空的，prev指针指向非空链表。最后再返回哨兵节点“prehead”指向的链表。和上面一样我们使用图示来帮助你理解。</p>
 <div>
  <div align="center">
- <img src="/2019/09/05/leetcode21/1567603163016.jpg" alt="迭代过程" style="zoom:80%;">
-</div>
+ <img src="/2019/09/05/leetcode21/1567603163016.jpg" alt="迭代过程" style="zoom:80%;">    
+</div> 
+
+
 
 <p>图中prev前的序号表示prev指针移动顺序。</p>
 <p>最终得到的结果为：1-&gt;2-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6</p>
@@ -1186,21 +1188,5 @@ MathJax.Hub.Queue(function() {
 
 </div>
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
