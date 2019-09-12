@@ -152,6 +152,222 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-01package" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/12/01package/">01背包问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/12/01package/" class="archive-article-date">
+  	<time datetime="2019-09-12T08:06:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="01背包问题"><a href="#01背包问题" class="headerlink" title="01背包问题"></a>01背包问题</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>有n个物品，它们有各自的体积和价值，现有给定容量的背包，如何让装进去的物品具有最大的价值。举个例子来说明，假设背包的容量为8，装下面给出的四件物品：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">i（物品编号）</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">w（体积）</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td style="text-align:center">v（价值）</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="总体思路"><a href="#总体思路" class="headerlink" title="总体思路"></a>总体思路</h2><p>动态规划的解题步骤分为：</p>
+<ol>
+<li>问题抽象化</li>
+<li>建立模型</li>
+<li>寻找约束条件</li>
+<li>判断是否满足最优性原理</li>
+<li>找大问题与小问题的递推关系式</li>
+<li>填表</li>
+<li>寻找解组成</li>
+</ol>
+<p>最终找出01背包问题的最优解以及解组成，然后编写代码实现。</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>其实我们正常思维，一般会想，我要尽量装满8公斤，把最大的价值求出来，可是这样的话，就需要用到递归，递归能解出来，只是算法难度高。但是什么是动态规划，动态规划就是逆着来，我要求装8公斤的物品怎么装使得价值最大。先考虑容量为0时的最大价值，在考虑容量为1时的最大价值，依次类推，每次都考虑最大价值，直到达到最大容量为止，填表记录每次结果。</p>
+<h2 id="动态规划原理"><a href="#动态规划原理" class="headerlink" title="动态规划原理"></a>动态规划原理</h2><p>动态规划与分治法类似，都是把大问题拆分成小问题，通过寻找大问题与小问题的递推关系，解决一个个小问题，最终达到解决原问题的效果。但不同的是，分治法在子问题和子子问题等上被重复计算了很多次，而动态规划则具有记忆性，通过填写表把所有已经解决的子问题答案纪录下来，在新问题里需要用到的子问题可以直接提取，避免了重复计算，从而节约了时间，所以在问题满足最优性原理之后，用动态规划解决问题的核心就在于填表，表填写完毕，最优解也就找到。</p>
+<p>最优性原理是动态规划的基础，最优性原理是指“多阶段决策过程的最优决策序列具有这样的性质：不论初始状态和初始决策如何，对于前面决策所造成的某一状态而言，其后各阶段的决策序列必须构成最优策略”。</p>
+<h2 id="背包问题的解决过程"><a href="#背包问题的解决过程" class="headerlink" title="背包问题的解决过程"></a>背包问题的解决过程</h2><p> 分为如下几步：</p>
+<ol>
+<li>建立模型，即求max{v1x1+v2x2+…+vnxn}，其中v表示物品的价值，x为0和1，表示放物品或是不放物品</li>
+<li>寻找约束条件，w1x1+w2x2+…+wnxn&lt;Z，其中Z表示总容量，w表示物品的体积</li>
+<li>寻找递推关系式，有两种情况：</li>
+</ol>
+<ul>
+<li>当前的包的容量小于物品体积，装不下，此时价值与之前i-1个的价值是一样的，即v(i,j)=v(i-1,j)；</li>
+<li>还有足够的容量可以装该物品，但是装了也不一定达到当前的最优价值，所以在装与不装之间做选择，即v(i,j)=max{v(i-1,j)，v(i-1,j-w(i))+v(i)}</li>
+</ul>
+<ol>
+<li>填表，对于我们这里的例题，首先初始化边界条件，v(0,j)=v(i,0)=0;</li>
+</ol>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">i/j</th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">7</th>
+<th style="text-align:center">8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">7</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">9</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">7</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol>
+<li>表格填完，最优解为v(4,8)=10。</li>
+</ol>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> 背包问题;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//定义一个数组a[i][j] = a[i]                 i表示当前物品的序号选上，j表示这个位置能得到的最大值</span></span><br><span class="line">        <span class="comment">//选或者不选动态规划</span></span><br><span class="line">        Scanner scn = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> [] w = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>];<span class="comment">//表示每件物品的重量</span></span><br><span class="line">        <span class="keyword">int</span> [] v = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>];<span class="comment">//表示每件物品的价值</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">            w[i] = scn.nextInt();<span class="comment">//输入重量</span></span><br><span class="line">            v[i] = scn.nextInt();<span class="comment">//输入价值</span></span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">int</span> [][] temp = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">6</span>][<span class="number">9</span>];   <span class="comment">//8表示背包最多能放8公斤的重量</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">9</span>;j++) &#123;  <span class="comment">//初始化每一行</span></span><br><span class="line">            temp[<span class="number">0</span>][j] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;<span class="number">6</span>;i++) &#123;  <span class="comment">//背包的重量为0的时候，最大价值肯定是0</span></span><br><span class="line">            temp[i][<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">         </span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;<span class="number">5</span>;i++) &#123;  <span class="comment">//从第一个物品开始选，记录我选了前面出现的物品，背包重量从1-8的能选上的最大的值</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;<span class="number">9</span>;j++) &#123; <span class="comment">//当i循环到最后一层4的时候，也就是得到了，我4件物品都选上的时候的最大的值</span></span><br><span class="line">                <span class="keyword">if</span>(w[i]&lt;=j) &#123; <span class="comment">//重量比这个状态小，那么就能放。 那么就只是放与不放，看是放重量大，还是不放重量大</span></span><br><span class="line">                    temp[i][j] = Math.max(temp[i-<span class="number">1</span>][j], temp[i-<span class="number">1</span>][j-w[i]]+v[i]);</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    temp[i][j] = temp[i-<span class="number">1</span>][j];<span class="comment">//第i件物品不能放</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">9</span>;j++) &#123;</span><br><span class="line">                System.out.printf(<span class="string">"%-5d"</span>,temp[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原文链接：<a href="https://blog.csdn.net/qq_38410730/article/details/81667885" target="_blank" rel="noopener">https://blog.csdn.net/qq_38410730/article/details/81667885</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">一道公司的笔试题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/12/01package/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-box" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1124,19 +1340,19 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">vivo公司的笔试题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">一道公司的笔试题</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">【1】合并两个有序链表</a>
+                <a href="javascript:void(0)" class="js-tag color1">vivo公司的笔试题</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">【2】删除排序数组中的重复项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">【1】合并两个有序链表</a>
               </li>
              
               <li class="article-tag-list-item">
