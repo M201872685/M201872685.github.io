@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 【1】合并两个有序链表 | Hexo</title>
+  <title>try-with-resource语句分析 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/【1】合并两个有序链表/index.html">
+  <meta name="description" content="这个所谓的try-with-resources，是个语法糖。实际上就是自动调用资源的close()函数。和Python里的with语句差不多。 例如： 12345static String readFirstLineFromFile(String path) throws IOException &amp;#123;    try (BufferedReader br = new BufferedRead">
+<meta name="keywords" content="极客时间学习收获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="try-with-resource语句分析">
+<meta property="og:url" content="http://yoursite.com/2019/09/16/try-with-resource/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这个所谓的try-with-resources，是个语法糖。实际上就是自动调用资源的close()函数。和Python里的with语句差不多。 例如： 12345static String readFirstLineFromFile(String path) throws IOException &amp;#123;    try (BufferedReader br = new BufferedRead">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-16T02:38:33.082Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="try-with-resource语句分析">
+<meta name="twitter:description" content="这个所谓的try-with-resources，是个语法糖。实际上就是自动调用资源的close()函数。和Python里的with语句差不多。 例如： 12345static String readFirstLineFromFile(String path) throws IOException &amp;#123;    try (BufferedReader br = new BufferedRead">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,60 +155,188 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-try-with-resource" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/05/leetcode21/" class="archive-article-date">
-  	<time datetime="2019-09-05T02:13:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/05/leetcode21/">Java小白初编程</a>
+    <h1 class="article-title" itemprop="name">
+      try-with-resource语句分析
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/16/try-with-resource/" class="archive-article-date">
+  	<time datetime="2019-09-16T02:35:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个所谓的try-with-resources，是个语法糖。实际上就是自动调用资源的close()函数。和Python里的with语句差不多。</p>
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> String <span class="title">readFirstLineFromFile</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> (BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(path))) &#123;</span><br><span class="line">        <span class="keyword">return</span> br.readLine();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到try语句多了个括号，而在括号里初始化了一个BufferedReader。这种在try后面加个括号，再初始化对象的语法就叫try-with-resources。</p>
+<p>实际上，相当于下面的代码（其实略有不同，下面会说明）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> String <span class="title">readFirstLineFromFileWithFinallyBlock</span><span class="params">(String path)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">    BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(path));</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> br.readLine();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (br != <span class="keyword">null</span>) br.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>很容易可以猜想到，这是编绎器自动在try-with-resources后面增加了判断对象是否为null，如果不为null，则调用close()函数的的字节码。只有实现了java.lang.AutoCloseable接口，或者java.io.Closable（实际上继随自java.lang.AutoCloseable）接口的对象，才会自动调用其close()函数。</p>
+<p>有点不同的是java.io.Closable要求一实现者保证close函数可以被重复调用。而AutoCloseable的close()函数则不要求是幂等的。具体可以参考Javadoc。</p>
+<p>下面从编绎器生成的字节码来分析下，try-with-resources到底是怎样工作的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TryStudy</span> <span class="keyword">implements</span> <span class="title">AutoCloseable</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">		<span class="keyword">try</span>(TryStudy tryStudy = <span class="keyword">new</span> TryStudy())&#123;</span><br><span class="line">			System.out.println(tryStudy);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>TryStudy实现了AutoCloseable接口，下面来看下test函数的字节码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="title">test</span><span class="params">()</span>V <span class="keyword">throws</span> java/lang/Exception </span></span><br><span class="line"><span class="function">    TRYCATCHBLOCK L0 L1 L2 </span></span><br><span class="line"><span class="function">    TRYCATCHBLOCK L3 L4 L4 </span></span><br><span class="line"><span class="function">   L5</span></span><br><span class="line"><span class="function">    LINENUMBER 21 L5</span></span><br><span class="line"><span class="function">    ACONST_NULL</span></span><br><span class="line"><span class="function">    ASTORE 0</span></span><br><span class="line"><span class="function">    ACONST_NULL</span></span><br><span class="line"><span class="function">    ASTORE 1</span></span><br><span class="line"><span class="function">   L3</span></span><br><span class="line"><span class="function">    NEW TryStudy</span></span><br><span class="line"><span class="function">    DUP</span></span><br><span class="line"><span class="function">    INVOKESPECIAL TryStudy.&lt;init&gt; <span class="params">()</span>V</span></span><br><span class="line"><span class="function">    ASTORE 2</span></span><br><span class="line"><span class="function">   L0</span></span><br><span class="line"><span class="function">    LINENUMBER 22 L0</span></span><br><span class="line"><span class="function">    GETSTATIC java/lang/System.out : Ljava/io/PrintStream</span>;</span><br><span class="line">    ALOAD <span class="number">2</span></span><br><span class="line">    INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/Object;)V</span><br><span class="line">   L1</span><br><span class="line">    LINENUMBER <span class="number">23</span> L1</span><br><span class="line">    ALOAD <span class="number">2</span></span><br><span class="line">    IFNULL L6</span><br><span class="line">    ALOAD <span class="number">2</span></span><br><span class="line">    INVOKEVIRTUAL TryStudy.close ()V</span><br><span class="line">    GOTO L6</span><br><span class="line">   L2</span><br><span class="line">   FRAME FULL [java/lang/Throwable java/lang/Throwable TryStudy] [java/lang/Throwable]</span><br><span class="line">    ASTORE <span class="number">0</span></span><br><span class="line">    ALOAD <span class="number">2</span></span><br><span class="line">    IFNULL L7</span><br><span class="line">    ALOAD <span class="number">2</span></span><br><span class="line">    INVOKEVIRTUAL TryStudy.close ()V</span><br><span class="line">   L7</span><br><span class="line">   FRAME CHOP <span class="number">1</span></span><br><span class="line">    ALOAD <span class="number">0</span></span><br><span class="line">    ATHROW</span><br><span class="line">   L4</span><br><span class="line">   FRAME SAME1 java/lang/Throwable</span><br><span class="line">    ASTORE <span class="number">1</span></span><br><span class="line">    ALOAD <span class="number">0</span></span><br><span class="line">    IFNONNULL L8</span><br><span class="line">    ALOAD <span class="number">1</span></span><br><span class="line">    ASTORE <span class="number">0</span></span><br><span class="line">    GOTO L9</span><br><span class="line">   L8</span><br><span class="line">   FRAME SAME</span><br><span class="line">    ALOAD <span class="number">0</span></span><br><span class="line">    ALOAD <span class="number">1</span></span><br><span class="line">    IF_ACMPEQ L9</span><br><span class="line">    ALOAD <span class="number">0</span></span><br><span class="line">    ALOAD <span class="number">1</span></span><br><span class="line">    INVOKEVIRTUAL java/lang/Throwable.addSuppressed (Ljava/lang/Throwable;)V</span><br><span class="line">   L9</span><br><span class="line">   FRAME SAME</span><br><span class="line">    ALOAD <span class="number">0</span></span><br><span class="line">    ATHROW</span><br><span class="line">   L6</span><br><span class="line">    LINENUMBER <span class="number">24</span> L6</span><br><span class="line">   FRAME CHOP <span class="number">2</span></span><br><span class="line">    RETURN</span><br><span class="line">    LOCALVARIABLE tryStudy LTryStudy; L0 L7 <span class="number">2</span></span><br><span class="line">    MAXSTACK = <span class="number">2</span></span><br><span class="line">    MAXLOCALS = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>从字节码里可以看出，的确是有判断tryStudy对象是否为null，如果不是null，则调用close函数进行资源回收。再仔细分析，可以发现有一个Throwable.addSuppressed的调用，那么这个调用是什么呢？其实，上面的字节码大概是这个样子的（当然，不完全是这样的，因为汇编的各种灵活的跳转用Java是表达不出来的）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">	TryStudy tryStudy = <span class="keyword">null</span>;</span><br><span class="line">	<span class="keyword">try</span>&#123;</span><br><span class="line">		tryStudy = <span class="keyword">new</span> TryStudy();</span><br><span class="line">		System.out.println(tryStudy);</span><br><span class="line">	&#125;<span class="keyword">catch</span>(Throwable suppressedException) &#123;</span><br><span class="line">		<span class="keyword">if</span> (tryStudy != <span class="keyword">null</span>) &#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				tryStudy.close();</span><br><span class="line">			&#125;<span class="keyword">catch</span>(Throwable e) &#123;</span><br><span class="line">				e.addSuppressed(suppressedException);</span><br><span class="line">				<span class="keyword">throw</span> e;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">throw</span> suppressedException;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有点晕是吧，其实很简单。使用了try-with-resources语句之后，有可能会出现两个异常，一个是try块里的异常，一个是调用close函数里抛出的异常。</p>
+<p>当然，平时我们写代码时，没有关注到。一般都是再抛出close函数里的异常，前面的异常被丢弃了。</p>
+<p>如果在调用close函数时出现异常，那么前面的异常就被称为Suppressed Exceptions，因此Throwable还有个addSuppressed函数可以把它们保存起来，当用户捕捉到close里抛出的异常时，就可以调用Throwable.getSuppressed函数来取出close之前的异常了。</p>
+<p>总结：</p>
+<p>使用try-with-resources的语法可以实现资源的自动回收处理，大大提高了代码的便利性，和mutil catch一样，是个好东东。</p>
+<p>用编绎器生成的字节码的角度来看，try-with-resources语法更加高效点。</p>
+<p>java.io.Closable接口要求一实现者保证close函数可以被重复调用，而AutoCloseable的close()函数则不要求是幂等的。另外，Closeable接口的close方法抛出的是IOException异常，AutoCloseable接口的close方法抛出的是Exception异常。 因此，AutoCloseable的子类可以重写close方法的行为，抛出指定的异常，比如IOException异常，甚至可以不抛出异常。</p>
+<p>原文链接：<a href="https://blog.csdn.net/hengyunabc/article/details/18459463" target="_blank" rel="noopener">https://blog.csdn.net/hengyunabc/article/details/18459463</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">【1】合并两个有序链表</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">极客时间学习收获</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/16/try-with-resource/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/09/16/JDBC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JDBC数据库连接</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -226,9 +359,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
