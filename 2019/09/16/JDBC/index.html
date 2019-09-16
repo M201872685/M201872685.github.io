@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: vivo公司的笔试题 | Hexo</title>
+  <title>JDBC数据库连接 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/tags/vivo公司的笔试题/index.html">
+  <meta name="description" content="JDBC数据库连接安装相应的驱动程序后，现在是时候来学习使用JDBC建立数据库连接了。 建立JDBC连接所涉及的编程相当简单。 以下是基本的四个步骤 -  导入JDBC包：使用Java语言的import语句在Java代码开头位置导入所需的类。 注册JDBC驱动程序：使JVM将所需的驱动程序实现加载到内存中，从而可以满足JDBC请求。 数据库URL配置：创建一个正确格式化的地址，指向要连接到的数据库">
+<meta name="keywords" content="极客时间学习收获">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC数据库连接">
+<meta property="og:url" content="http://yoursite.com/2019/09/16/JDBC/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JDBC数据库连接安装相应的驱动程序后，现在是时候来学习使用JDBC建立数据库连接了。 建立JDBC连接所涉及的编程相当简单。 以下是基本的四个步骤 -  导入JDBC包：使用Java语言的import语句在Java代码开头位置导入所需的类。 注册JDBC驱动程序：使JVM将所需的驱动程序实现加载到内存中，从而可以满足JDBC请求。 数据库URL配置：创建一个正确格式化的地址，指向要连接到的数据库">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-16T02:15:00.055Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="JDBC数据库连接">
+<meta name="twitter:description" content="JDBC数据库连接安装相应的驱动程序后，现在是时候来学习使用JDBC建立数据库连接了。 建立JDBC连接所涉及的编程相当简单。 以下是基本的四个步骤 -  导入JDBC包：使用Java语言的import语句在Java代码开头位置导入所需的类。 注册JDBC驱动程序：使JVM将所需的驱动程序实现加载到内存中，从而可以满足JDBC请求。 数据库URL配置：创建一个正确格式化的地址，指向要连接到的数据库">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,60 +155,264 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JDBC" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/12/box/" class="archive-article-date">
-  	<time datetime="2019-09-12T07:09:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/12/box/">拆盒子问题</a>
+    <h1 class="article-title" itemprop="name">
+      JDBC数据库连接
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/16/JDBC/" class="archive-article-date">
+  	<time datetime="2019-09-16T02:13:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JDBC数据库连接"><a href="#JDBC数据库连接" class="headerlink" title="JDBC数据库连接"></a>JDBC数据库连接</h1><p>安装相应的驱动程序后，现在是时候来学习使用JDBC建立数据库连接了。</p>
+<p>建立JDBC连接所涉及的编程相当简单。 以下是基本的四个步骤 -</p>
+<ul>
+<li><strong>导入JDBC包</strong>：使用Java语言的<code>import</code>语句在Java代码开头位置导入所需的类。</li>
+<li><strong>注册JDBC驱动程序</strong>：使JVM将所需的驱动程序实现加载到内存中，从而可以满足JDBC请求。</li>
+<li><strong>数据库URL配置</strong>：创建一个正确格式化的地址，指向要连接到的数据库(如：MySQL,Oracle和MSSQL等等)。</li>
+<li><strong>创建连接对象</strong>：最后，调用<code>DriverManager</code>对象的<code>getConnection()</code>方法来建立实际的数据库连接。</li>
+</ul>
+<h2 id="1-导入JDBC包"><a href="#1-导入JDBC包" class="headerlink" title="1. 导入JDBC包"></a>1. 导入JDBC包</h2><p><code>import</code>语句告诉Java编译器在哪里找到在代码中引用的类，<code>import</code>语句一般放置在源代码的开头。<br>要使用标准的JDBC包，它允许在数据库表中执行选择，插入，更新和删除数据，请将以下导入添加到源代码中 -</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.sql.* ;  <span class="comment">// for standard JDBC programs</span></span><br><span class="line"><span class="keyword">import</span> java.math.* ; <span class="comment">// for BigDecimal and BigInteger support</span></span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<h2 id="2-注册JDBC驱动程序"><a href="#2-注册JDBC驱动程序" class="headerlink" title="2. 注册JDBC驱动程序"></a>2. 注册JDBC驱动程序</h2><p>在使用程序之前，必须先注册该驱动程序。 注册驱动程序是将Oracle驱动程序的类文件加载到内存中的过程，因此可以将其用作JDBC接口的实现。</p>
+<p>只需在程序中一次注册就可以。可以通过两种方式之一来注册驱动程序。</p>
+<h3 id="2-1-方法I-Class-forName"><a href="#2-1-方法I-Class-forName" class="headerlink" title="2.1 方法I - Class.forName()"></a>2.1 方法I - Class.forName()</h3><p>注册驱动程序最常见的方法是使用Java的<code>Class.forName()</code>方法，将驱动程序的类文件动态加载到内存中，并将其自动注册。这个方法是推荐使用的方法，因为它使驱动程序注册可配置和便携。</p>
+<p>以下示例使用<code>Class.forName()</code>注册Oracle驱动程序 -</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">   Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(ClassNotFoundException ex) &#123;</span><br><span class="line">   System.out.println(<span class="string">"Error: unable to load driver class!"</span>);</span><br><span class="line">   System.exit(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<p>使用JDBC驱动程序连接MySQL数据库的示例代码片段 - </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">Connection conn = <span class="keyword">null</span>;</span><br><span class="line">conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://hostname:port/db_name"</span>,<span class="string">"db_username"</span>, <span class="string">"db_password"</span>);</span><br><span class="line">conn.close();</span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<p>使用<code>getInstance()</code>方法来解决不合规的JVM，但是必须编写两个额外的异常，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">   Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>).newInstance();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(ClassNotFoundException ex) &#123;</span><br><span class="line">   System.out.println(<span class="string">"Error: unable to load driver class!"</span>);</span><br><span class="line">   System.exit(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">catch</span>(IllegalAccessException ex) &#123;</span><br><span class="line">   System.out.println(<span class="string">"Error: access problem while loading!"</span>);</span><br><span class="line">   System.exit(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">catch</span>(InstantiationException ex) &#123;</span><br><span class="line">   System.out.println(<span class="string">"Error: unable to instantiate driver!"</span>);</span><br><span class="line">   System.exit(<span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-方法II-DriverManager-registerDriver"><a href="#2-2-方法II-DriverManager-registerDriver" class="headerlink" title="2.2 方法II - DriverManager.registerDriver()"></a>2.2 方法II - DriverManager.registerDriver()</h3><p>第二种方法是使用静态<code>DriverManager.registerDriver()</code>方法来注册驱动程序。</p>
+<p>如果使用的是非JDK兼容的JVM(如Microsoft提供的)，则应使用<code>registerDriver()</code>方法。</p>
+<p>以下示例使用<code>registerDriver()</code>注册Oracle驱动程序 -</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">   Driver myDriver = <span class="keyword">new</span> oracle.jdbc.driver.OracleDriver();</span><br><span class="line">   DriverManager.registerDriver( myDriver );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>(ClassNotFoundException ex) &#123;</span><br><span class="line">   System.out.println(<span class="string">"Error: unable to load driver class!"</span>);</span><br><span class="line">   System.exit(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<h2 id="数据库URL配置"><a href="#数据库URL配置" class="headerlink" title="数据库URL配置"></a>数据库URL配置</h2><p>加载驱动程序后，可以使用<code>DriverManager.getConnection()</code>方法建立连接。 为了方便参考，这里列出三个重载的<code>DriverManager.getConnection()</code>方法 -</p>
+<ul>
+<li><code>getConnection(String url)</code></li>
+<li><code>getConnection(String url, Properties prop)</code></li>
+<li><code>getConnection(String url, String user, String password)</code></li>
+</ul>
+<p>这里每个格式都需要一个数据库URL。 数据库URL是指向数据库的地址。</p>
+<p>制定数据库URL是建立连接相关联的大多数错误问题发生的地方。</p>
+<p>下表列出了常用的JDBC驱动程序名称和数据库URL。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>RDBMS</th>
+<th>JDBC驱动程序名称</th>
+<th>URL格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MySQL</td>
+<td><code>com.mysql.jdbc.Driver</code></td>
+<td><code>jdbc:mysql://hostname/databaseName</code></td>
+</tr>
+<tr>
+<td>ORACLE</td>
+<td><code>oracle.jdbc.driver.OracleDriver</code></td>
+<td><code>jdbc:oracle:thin:@hostname:portNumber:databaseName</code></td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td><code>org.postgresql.Driver</code></td>
+<td><code>jdbc:postgresql://hostname:port/dbname</code></td>
+</tr>
+<tr>
+<td>DB2</td>
+<td><code>com.ibm.db2.jdbc.net.DB2Driver</code></td>
+<td><code>jdbc:db2:hostname:port Number/databaseName</code></td>
+</tr>
+<tr>
+<td>Sybase</td>
+<td><code>com.sybase.jdbc.SybDriver</code></td>
+<td><code>jdbc:sybase:Tds:hostname: portNumber/databaseName</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>URL格式的所有突出部分都是静态的，只需要根据数据库设置更改对应的部分。</p>
+<h2 id="创建连接对象"><a href="#创建连接对象" class="headerlink" title="创建连接对象"></a>创建连接对象</h2><p>上面列出了三种形式的<code>DriverManager.getConnection()</code>方法来创建一个连接对象。</p>
+<h2 id="使用具有用户名和密码的数据库URL"><a href="#使用具有用户名和密码的数据库URL" class="headerlink" title="使用具有用户名和密码的数据库URL"></a>使用具有用户名和密码的数据库URL</h2><p><code>getConnection()</code>最常用的形式要求传递数据库URL，用户名和密码：</p>
+<p>假设使用Oracle thin驱动程序，那么需要为URL的数据库部分指定：<code>host:port:databaseName</code>值。</p>
+<p>如果主机名为<strong>amrood</strong>的TCP/IP地址为<em>192.0.0.10</em>，并且Oracle侦听器配置为侦听端口<code>1521</code>，并且要连接的数据库名称是<code>EMP</code>，则完整的数据库URL将是 -</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jdbc:oracle:thin:<span class="meta">@amrood</span>:<span class="number">1521</span>:EMP</span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line">jdbc:oracle:thin:@<span class="number">192.0</span>.0.10:<span class="number">1521</span>:EMP</span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<p>现在必须使用适当的用户名和密码调用<code>getConnection()</code>方法获取一个<code>Connection</code>对象，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String URL = <span class="string">"jdbc:oracle:thin:@amrood:1521:EMP"</span>;</span><br><span class="line"><span class="comment">// String URL = "jdbc:oracle:thin:@192.0.0.10:1521:EMP";</span></span><br><span class="line">String USER = <span class="string">"username"</span>;</span><br><span class="line">String PASS = <span class="string">"password"</span></span><br><span class="line">Connection conn = DriverManager.getConnection(URL, USER, PASS);</span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<h3 id="仅使用数据库URL"><a href="#仅使用数据库URL" class="headerlink" title="仅使用数据库URL"></a>仅使用数据库URL</h3><p><code>DriverManager.getConnection()</code>方法的第二种形式只需要数据库URL -</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DriverManager.getConnection(String url);</span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<p>但是，在本示例中，数据库URL包括用户名和密码，并具有以下一般形式 -</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">jdbc:oracle:driver:username/password<span class="meta">@database</span></span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<p>所以，上述连接可以使用如下方式创建 -</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String URL = <span class="string">"jdbc:oracle:thin:username/password@192.168.0.10:1521:EMP"</span>;</span><br><span class="line">Connection conn = DriverManager.getConnection(URL);</span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<h3 id="使用数据库URL和Properties对象"><a href="#使用数据库URL和Properties对象" class="headerlink" title="使用数据库URL和Properties对象"></a>使用数据库URL和Properties对象</h3><p><code>DriverManager.getConnection()</code>方法的第三种形式需要一个数据库URL和一个<code>Properties</code>对象 -</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DriverManager.getConnection(String url, Properties info);</span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<p><code>Properties</code>对象包含一组键-值对。 在调用<code>getConnection()</code>方法时，它用于将驱动程序属性传递给驱动程序。</p>
+<p>要进行与上述示例相同的连接，请使用以下代码 -</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line">String URL = <span class="string">"jdbc:oracle:thin:@amrood:1521:EMP"</span>;</span><br><span class="line">Properties info = <span class="keyword">new</span> Properties( );</span><br><span class="line">info.put( <span class="string">"user"</span>, <span class="string">"root"</span> );</span><br><span class="line">info.put( <span class="string">"password"</span>, <span class="string">"password12321"</span> );</span><br><span class="line"></span><br><span class="line">Connection conn = DriverManager.getConnection(URL, info);</span><br><span class="line">Java</span><br></pre></td></tr></table></figure>
+<h2 id="关闭JDBC连接"><a href="#关闭JDBC连接" class="headerlink" title="关闭JDBC连接"></a>关闭JDBC连接</h2><p>在JDBC程序结束之后，显式地需要关闭与数据库的所有连接以结束每个数据库会话。 但是，如果在编写程序中忘记了关闭也没有关系，Java的垃圾收集器将在清除过时的对象时也会关闭这些连接。</p>
+<p>依靠垃圾收集，特别是数据库编程，是一个非常差的编程实践。所以应该要使用与连接对象关联的<code>close()</code>方法关闭连接。</p>
+<p>要确保连接已关闭，可以将关闭连接的代码中编写在“<code>finally</code>”块中。 一个<code>finally</code>块总是会被执行，不管是否发生异常。</p>
+<p>要关闭上面打开的连接，应该调用<code>close()</code>方法如下 -</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conn.close();</span><br><span class="line">SQL</span><br></pre></td></tr></table></figure>
+<p>显式关闭连接可节省数据库系统的资源。为了更好的理解，建议您学习的<a href="http://www.yiibai.com/jdbc/jdbc-sample-code.html" target="_blank" rel="noopener">JDBC示例代码教程</a>。</p>
+<p>参考Oracle+JDBC示例代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.yiibai;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OracleJDBCExample</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] argv)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"-------- Oracle JDBC Connection Testing ------"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">            Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"Where is your Oracle JDBC Driver?"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"Oracle JDBC Driver Registered!"</span>);</span><br><span class="line"></span><br><span class="line">        Connection connection = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line">            connection = DriverManager.getConnection(</span><br><span class="line">                    <span class="string">"jdbc:oracle:thin:@localhost:1521:xe"</span>, <span class="string">"system"</span>, <span class="string">"password"</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"Connection Failed! Check output console"</span>);</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (connection != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"You made it, take control your database now!"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"Failed to make connection!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原文出自【易百教程】：<a href="https://www.yiibai.com/jdbc/jdbc-db-connections.html" target="_blank" rel="noopener">https://www.yiibai.com/jdbc/jdbc-db-connections.html</a>  </p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">vivo公司的笔试题</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">极客时间学习收获</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/16/JDBC/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/09/14/leetcode38/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">java小白初编程</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -226,9 +435,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
