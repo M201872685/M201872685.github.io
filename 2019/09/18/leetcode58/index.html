@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>java小白初编程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="子字符串查找方法indexOf（）的使用方法Java中字符串中子串的查找共有四种方法，如下：  int indexOf(String str)：返回第一次出现的指定子字符串在此字符串中的索引。 int indexOf(String str,int startIndex)：从指定的索引处开始，返回第一次出现的指定子字符串在此字符串中的索引。 int lastIndexOf(String str)：返">
-<meta name="keywords" content="【3】字符串匹配问题">
+  <meta name="description" content="最后一个单词的长度题目描述给定一个仅包含大小写字母和空格 ‘ ‘ 的字符串，返回其最后一个单词的长度。如果不存在最后一个单词，请返回 0 。 说明：一个单词是指由字母组成，但不包含任何空格的字符串。 示例：  输入: “Hello World”输出: 5  解题思路改题实际上是一个字符串遍历问题，从字符串末尾开始向前遍历，其中主要有两种情况：  以字符串“Hello World”为例，从后向前遍历">
+<meta name="keywords" content="【7】最后一个单词的长度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java小白初编程">
-<meta property="og:url" content="http://yoursite.com/2019/09/11/string/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/09/18/leetcode58/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="子字符串查找方法indexOf（）的使用方法Java中字符串中子串的查找共有四种方法，如下：  int indexOf(String str)：返回第一次出现的指定子字符串在此字符串中的索引。 int indexOf(String str,int startIndex)：从指定的索引处开始，返回第一次出现的指定子字符串在此字符串中的索引。 int lastIndexOf(String str)：返">
+<meta property="og:description" content="最后一个单词的长度题目描述给定一个仅包含大小写字母和空格 ‘ ‘ 的字符串，返回其最后一个单词的长度。如果不存在最后一个单词，请返回 0 。 说明：一个单词是指由字母组成，但不包含任何空格的字符串。 示例：  输入: “Hello World”输出: 5  解题思路改题实际上是一个字符串遍历问题，从字符串末尾开始向前遍历，其中主要有两种情况：  以字符串“Hello World”为例，从后向前遍历">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-11T06:54:27.337Z">
+<meta property="og:updated_time" content="2019-09-18T07:41:58.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java小白初编程">
-<meta name="twitter:description" content="子字符串查找方法indexOf（）的使用方法Java中字符串中子串的查找共有四种方法，如下：  int indexOf(String str)：返回第一次出现的指定子字符串在此字符串中的索引。 int indexOf(String str,int startIndex)：从指定的索引处开始，返回第一次出现的指定子字符串在此字符串中的索引。 int lastIndexOf(String str)：返">
+<meta name="twitter:description" content="最后一个单词的长度题目描述给定一个仅包含大小写字母和空格 ‘ ‘ 的字符串，返回其最后一个单词的长度。如果不存在最后一个单词，请返回 0 。 说明：一个单词是指由字母组成，但不包含任何空格的字符串。 示例：  输入: “Hello World”输出: 5  解题思路改题实际上是一个字符串遍历问题，从字符串末尾开始向前遍历，其中主要有两种情况：  以字符串“Hello World”为例，从后向前遍历">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -155,7 +155,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-string" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-leetcode58" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -167,57 +167,30 @@
   
 
         
-        <a href="/2019/09/11/string/" class="archive-article-date">
-  	<time datetime="2019-09-11T03:37:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-11</time>
+        <a href="/2019/09/18/leetcode58/" class="archive-article-date">
+  	<time datetime="2019-09-18T07:40:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="子字符串查找方法"><a href="#子字符串查找方法" class="headerlink" title="子字符串查找方法"></a>子字符串查找方法</h1><h2 id="indexOf（）的使用方法"><a href="#indexOf（）的使用方法" class="headerlink" title="indexOf（）的使用方法"></a>indexOf（）的使用方法</h2><p>Java中字符串中子串的查找共有四种方法，如下：</p>
-<ol>
-<li>int indexOf(String str)：返回第一次出现的指定子字符串在此字符串中的索引。</li>
-<li>int indexOf(String str,int startIndex)：从指定的索引处开始，返回第一次出现的指定子字符串在此字符串中的索引。</li>
-<li>int lastIndexOf(String str)：返回在此字符串中最右边出现的指定子字符串的索引。</li>
-<li>int lastIndexOf(String str,int startIndex)：从指定的索引处开始向后搜索，返回在此字符串中最后一次出现的指定子字符串的索引。</li>
-</ol>
-<p>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        String s = <span class="string">"xXccxxxXX"</span>;           </span><br><span class="line">        System.out.println(s.indexOf(<span class="string">"c"</span>));     </span><br><span class="line">        System.out.println(s.indexOf(<span class="string">"c"</span>, <span class="number">3</span>));     </span><br><span class="line">        System.out.println(s.indexOf(<span class="string">"y"</span>));     </span><br><span class="line">        System.out.println(s.lastIndexOf(<span class="string">"x"</span>));   </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="利用substring（）方法"><a href="#利用substring（）方法" class="headerlink" title="利用substring（）方法"></a>利用substring（）方法</h2><p>substring()方法用于提取字符串中介于两个指定下表之间的字符。其语法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringObject.substring(start,stop)</span><br></pre></td></tr></table></figure>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">start</td>
-<td style="text-align:left">必需。一个非负的整数，规定要提取的子串的第一个字符在 stringObject 中的位置。</td>
-</tr>
-<tr>
-<td style="text-align:left">stop</td>
-<td style="text-align:left">可选。一个非负的整数，比要提取的子串的最后一个字符在 stringObject 中的位置多 1。</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>该函数返回一个新的字符串，该字符串值包含 <em>stringObject</em> 的一个子字符串，其内容是从 <em>start</em> 处到 <em>stop</em>-1 处的所有字符，其长度为 <em>stop</em>减 <em>start</em>。</p>
-<p><strong>说明：substring() 方法返回的子串包括 <em>start</em> 处的字符，但不包括 <em>stop</em> 处的字符。如果参数 <em>start</em> 与 <em>stop</em> 相等，那么该方法返回的就是一个空串（即长度为 0 的字符串）。如果 <em>start</em> 比 <em>stop</em> 大，那么该方法在提取子串之前会先交换这两个参数。</strong></p>
-<p><strong>注：与 <a href="https://www.w3school.com.cn/jsref/jsref_slice_string.asp" target="_blank" rel="noopener">slice()</a> 和 <a href="https://www.w3school.com.cn/jsref/jsref_substr.asp" target="_blank" rel="noopener">substr()</a> 方法不同的是，substring() 不接受负的参数。</strong></p>
-<h2 id="典型例题"><a href="#典型例题" class="headerlink" title="典型例题"></a>典型例题</h2><p>例题来源于leetcode28题。</p>
-<p>题目描述：给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。</p>
-<p>应用substring方法的代码实现如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">strStr</span><span class="params">(String haystack, String needle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> len = needle.length();</span><br><span class="line">        <span class="keyword">int</span> lenhay = haystack.length();</span><br><span class="line">        <span class="keyword">if</span> ( lenhay &lt; len )</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> star = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">int</span> end = len-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (end &lt; lenhay)&#123;</span><br><span class="line">             <span class="keyword">if</span> (haystack.substring(star,end+<span class="number">1</span>).equals(needle))&#123;</span><br><span class="line">                 <span class="keyword">return</span> star;</span><br><span class="line">             &#125;</span><br><span class="line">            end++;</span><br><span class="line">            star++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution12</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    Solution num = <span class="keyword">new</span> Solution();</span><br><span class="line">    String a = <span class="string">"beautiful"</span>;</span><br><span class="line">    String b = <span class="string">"ti"</span>;</span><br><span class="line">    <span class="keyword">int</span> i = num.strStr(a,b);</span><br><span class="line">    System.out.println(<span class="string">"子串在主串中的序号为："</span>+i);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果为：</p>
+        <h1 id="最后一个单词的长度"><a href="#最后一个单词的长度" class="headerlink" title="最后一个单词的长度"></a>最后一个单词的长度</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个仅包含大小写字母和空格 ‘ ‘ 的字符串，返回其最后一个单词的长度。如果不存在最后一个单词，请返回 0 。</p>
+<p>说明：一个单词是指由字母组成，但不包含任何空格的字符串。</p>
+<p><strong>示例：</strong></p>
 <blockquote>
-<p>子串在主串中的序号为：4</p>
+<p>输入: “Hello World”<br>输出: 5</p>
 </blockquote>
-<p>链接：<a href="https://leetcode-cn.com/problems/implement-strstr" target="_blank" rel="noopener">https://leetcode-cn.com/problems/implement-strstr</a></p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>改题实际上是一个字符串遍历问题，从字符串末尾开始向前遍历，其中主要有两种情况：</p>
+<ol>
+<li>以字符串“Hello World”为例，从后向前遍历直到遍历到头或者遇到空格为止，即为最后一个单词”World”的长度5</li>
+<li>以字符串“Hello World”为例，需要先将末尾的空格过滤掉，再进行第一种情况的操作，即认为最后一个单词为”World”，长度为5</li>
+</ol>
+<p>所以完整过程为先从后过滤掉空格找到单词尾部，再从尾部向前遍历，找到单词头部，最后两者相减，即为单词的长度。时间复杂度为O（n），n为结尾空格和结尾单词总体长度。</p>
+<h2 id="算法程序"><a href="#算法程序" class="headerlink" title="算法程序"></a>算法程序</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">方法<span class="number">1</span>：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLastWord</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> end = s.length() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(end &gt;= <span class="number">0</span> &amp;&amp; s.charAt(end) == <span class="string">' '</span>) end--;</span><br><span class="line">        <span class="keyword">if</span>(end &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> start = end;</span><br><span class="line">        <span class="keyword">while</span>(start &gt;= <span class="number">0</span> &amp;&amp; s.charAt(start) != <span class="string">' '</span>) start--;</span><br><span class="line">        <span class="keyword">return</span> end - start;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">方法<span class="number">2</span>：</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLastWord</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        s=s.trim();</span><br><span class="line">        <span class="keyword">int</span> end = s.length() - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(end &lt; <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> start = end;</span><br><span class="line">        <span class="keyword">while</span>(start &gt;= <span class="number">0</span> &amp;&amp; s.charAt(start) != <span class="string">' '</span>) start--;</span><br><span class="line">        <span class="keyword">return</span> end - start;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>来源：<a href="https://leetcode-cn.com/problems/length-of-last-word" target="_blank" rel="noopener">力扣（LeetCode）</a></p>
+<p><a href="https://leetcode-cn.com/problems/length-of-last-word/solution/hua-jie-suan-fa-58-zui-hou-yi-ge-dan-ci-de-chang-d/" target="_blank" rel="noopener">原文链接</a></p>
 
       
 
@@ -252,7 +225,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">【3】字符串匹配问题</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">【7】最后一个单词的长度</a>
         		</li>
       		
 		</ul>
@@ -308,7 +281,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/11/string/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/18/leetcode58/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -322,18 +295,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/12/leetcode35/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          java小白初编程
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/09/11/dynamic/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">矩阵连乘最小次数问题</div>
+    <a href="/2019/09/17/SkipList/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">跳表实现</div>
       <i class="icon-circle-right"></i>
     </a>
   
