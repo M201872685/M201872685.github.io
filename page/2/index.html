@@ -152,6 +152,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-box" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/12/box/">拆盒子问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/12/box/" class="archive-article-date">
+  	<time datetime="2019-09-12T07:09:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="拆礼物盒问题"><a href="#拆礼物盒问题" class="headerlink" title="拆礼物盒问题"></a>拆礼物盒问题</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>四月一日快到了，Tom想了个愚人的好办法——送礼物。嘿嘿，不要想的太好，这礼物可没那么简单，Tom为了愚人，准备了一堆盒子，其中有一个盒子里面装了礼物。盒子里面可以再放零个或者多个盒子。假设放礼物的盒子里不再放其他盒子。用()表示一个盒子，A表示礼物，Tom想让你帮她算出愚人指数，即最少需要拆多少个盒子才能拿到礼物。</p>
+<p>输入：只包含‘（’，‘）’，‘A’三种字符的字符串，其中A表示礼物</p>
+<p>输出：最少需要拆盒子的次数</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>由于题目没有说明是从左边开始拆还是右边开始拆，所以左右两边要分别考虑。左边开始拆的时候，遇到‘（’表示一次拆盒子，‘）‘说明这次拆盒子无效。比如（（（））A（（））），如这种情况，只需要一次就好了。而从右边开始拆的话正好相反，遇到’）‘表示一次拆盒子，遇到’（‘说明拆盒子无效。</p>
+<h2 id="算法程序"><a href="#算法程序" class="headerlink" title="算法程序"></a>算法程序</h2><p>依照上面的解题思路，下面给出实现代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main2</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">while</span>(in.hasNext())&#123;</span><br><span class="line">            <span class="keyword">char</span>[] strA = in.nextLine().toCharArray();</span><br><span class="line">            <span class="keyword">int</span> count = getCount(strA);</span><br><span class="line">            System.out.println(count);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        in.close();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 左右拆盒子次数的最小值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> strA</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">(<span class="keyword">char</span>[] strA)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> left = getLeftCount(strA);</span><br><span class="line">        <span class="keyword">int</span> right = getRightCount(strA);</span><br><span class="line">        <span class="keyword">return</span> left&gt;right?right:left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 右边开始拆</span></span><br><span class="line"><span class="comment">     * ):一次拆盒子，count++</span></span><br><span class="line"><span class="comment">     * (:说明这次是无效的拆盒子，所以count--</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> strA</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getRightCount</span><span class="params">(<span class="keyword">char</span>[] strA)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(strA==<span class="keyword">null</span>||strA.length==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        LinkedList&lt;Character&gt; stack = <span class="keyword">new</span> LinkedList&lt;Character&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=strA.length-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(strA[i]==<span class="string">'A'</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> count;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(strA[i]==<span class="string">')'</span>)&#123;</span><br><span class="line">                stack.push(<span class="string">')'</span>);</span><br><span class="line">                count++;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(strA[i] == <span class="string">'('</span>)&#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">                count--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 左边开始拆</span></span><br><span class="line"><span class="comment">     * (:一次拆盒子，count++</span></span><br><span class="line"><span class="comment">     * ):说明这次是无效的拆盒子，所以count--</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> strA</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLeftCount</span><span class="params">(<span class="keyword">char</span>[] strA)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(strA==<span class="keyword">null</span>||strA.length==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        LinkedList&lt;Character&gt; stack = <span class="keyword">new</span> LinkedList&lt;Character&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;strA.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(strA[i]==<span class="string">'A'</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> count;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(strA[i]==<span class="string">'('</span>)&#123;</span><br><span class="line">                stack.push(<span class="string">'('</span>);</span><br><span class="line">                count++;</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(strA[i] == <span class="string">')'</span>)&#123;</span><br><span class="line">                stack.pop();</span><br><span class="line">                count--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>原文链接：<a href="https://www.cnblogs.com/theskulls/p/5706712.html?tdsourcetag=s_pcqq_aiomsg" target="_blank" rel="noopener">https://www.cnblogs.com/theskulls/p/5706712.html?tdsourcetag=s_pcqq_aiomsg</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">vivo公司的笔试题</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/12/box/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-leetcode35" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1048,7 +1128,7 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">vivo公司的笔试题</a>
+                <a href="javascript:void(0)" class="js-tag color4">一道公司的笔试题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1056,15 +1136,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">【2】删除排序数组中的重复项</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">一道公司的笔试题</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">【1】合并两个有序链表</a>
+                <a href="javascript:void(0)" class="js-tag color1">vivo公司的笔试题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1072,7 +1144,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">【5】报数</a>
+                <a href="javascript:void(0)" class="js-tag color2">【1】合并两个有序链表</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1081,6 +1153,18 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">【7】最后一个单词的长度</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">【8】数组加一</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">【5】报数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">【2】删除排序数组中的重复项</a>
               </li>
              
               <li class="article-tag-list-item">

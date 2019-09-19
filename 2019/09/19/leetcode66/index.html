@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>java小白初编程 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="子字符串查找方法indexOf（）的使用方法Java中字符串中子串的查找共有四种方法，如下：  int indexOf(String str)：返回第一次出现的指定子字符串在此字符串中的索引。 int indexOf(String str,int startIndex)：从指定的索引处开始，返回第一次出现的指定子字符串在此字符串中的索引。 int lastIndexOf(String str)：返">
-<meta name="keywords" content="【3】字符串匹配问题">
+  <meta name="description" content="数组加一题目描述给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。 示例1：  输入: [1,2,3]输出: [1,2,4]解释: 输入数组表示数字 123。   示例2：  输入: [4,3,2,1]输出: [4,3,2,2]解释: 输入数组表示数字 4321。  解题">
+<meta name="keywords" content="【8】数组加一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java小白初编程">
-<meta property="og:url" content="http://yoursite.com/2019/09/11/string/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/09/19/leetcode66/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="子字符串查找方法indexOf（）的使用方法Java中字符串中子串的查找共有四种方法，如下：  int indexOf(String str)：返回第一次出现的指定子字符串在此字符串中的索引。 int indexOf(String str,int startIndex)：从指定的索引处开始，返回第一次出现的指定子字符串在此字符串中的索引。 int lastIndexOf(String str)：返">
+<meta property="og:description" content="数组加一题目描述给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。 示例1：  输入: [1,2,3]输出: [1,2,4]解释: 输入数组表示数字 123。   示例2：  输入: [4,3,2,1]输出: [4,3,2,2]解释: 输入数组表示数字 4321。  解题">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-11T06:54:27.337Z">
+<meta property="og:updated_time" content="2019-09-19T02:38:14.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java小白初编程">
-<meta name="twitter:description" content="子字符串查找方法indexOf（）的使用方法Java中字符串中子串的查找共有四种方法，如下：  int indexOf(String str)：返回第一次出现的指定子字符串在此字符串中的索引。 int indexOf(String str,int startIndex)：从指定的索引处开始，返回第一次出现的指定子字符串在此字符串中的索引。 int lastIndexOf(String str)：返">
+<meta name="twitter:description" content="数组加一题目描述给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。 示例1：  输入: [1,2,3]输出: [1,2,4]解释: 输入数组表示数字 123。   示例2：  输入: [4,3,2,1]输出: [4,3,2,2]解释: 输入数组表示数字 4321。  解题">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -155,7 +155,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-string" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-leetcode66" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
@@ -167,57 +167,33 @@
   
 
         
-        <a href="/2019/09/11/string/" class="archive-article-date">
-  	<time datetime="2019-09-11T03:37:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-11</time>
+        <a href="/2019/09/19/leetcode66/" class="archive-article-date">
+  	<time datetime="2019-09-19T02:35:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="子字符串查找方法"><a href="#子字符串查找方法" class="headerlink" title="子字符串查找方法"></a>子字符串查找方法</h1><h2 id="indexOf（）的使用方法"><a href="#indexOf（）的使用方法" class="headerlink" title="indexOf（）的使用方法"></a>indexOf（）的使用方法</h2><p>Java中字符串中子串的查找共有四种方法，如下：</p>
-<ol>
-<li>int indexOf(String str)：返回第一次出现的指定子字符串在此字符串中的索引。</li>
-<li>int indexOf(String str,int startIndex)：从指定的索引处开始，返回第一次出现的指定子字符串在此字符串中的索引。</li>
-<li>int lastIndexOf(String str)：返回在此字符串中最右边出现的指定子字符串的索引。</li>
-<li>int lastIndexOf(String str,int startIndex)：从指定的索引处开始向后搜索，返回在此字符串中最后一次出现的指定子字符串的索引。</li>
-</ol>
-<p>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        String s = <span class="string">"xXccxxxXX"</span>;           </span><br><span class="line">        System.out.println(s.indexOf(<span class="string">"c"</span>));     </span><br><span class="line">        System.out.println(s.indexOf(<span class="string">"c"</span>, <span class="number">3</span>));     </span><br><span class="line">        System.out.println(s.indexOf(<span class="string">"y"</span>));     </span><br><span class="line">        System.out.println(s.lastIndexOf(<span class="string">"x"</span>));   </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="利用substring（）方法"><a href="#利用substring（）方法" class="headerlink" title="利用substring（）方法"></a>利用substring（）方法</h2><p>substring()方法用于提取字符串中介于两个指定下表之间的字符。其语法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stringObject.substring(start,stop)</span><br></pre></td></tr></table></figure>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:left">参数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">start</td>
-<td style="text-align:left">必需。一个非负的整数，规定要提取的子串的第一个字符在 stringObject 中的位置。</td>
-</tr>
-<tr>
-<td style="text-align:left">stop</td>
-<td style="text-align:left">可选。一个非负的整数，比要提取的子串的最后一个字符在 stringObject 中的位置多 1。</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>该函数返回一个新的字符串，该字符串值包含 <em>stringObject</em> 的一个子字符串，其内容是从 <em>start</em> 处到 <em>stop</em>-1 处的所有字符，其长度为 <em>stop</em>减 <em>start</em>。</p>
-<p><strong>说明：substring() 方法返回的子串包括 <em>start</em> 处的字符，但不包括 <em>stop</em> 处的字符。如果参数 <em>start</em> 与 <em>stop</em> 相等，那么该方法返回的就是一个空串（即长度为 0 的字符串）。如果 <em>start</em> 比 <em>stop</em> 大，那么该方法在提取子串之前会先交换这两个参数。</strong></p>
-<p><strong>注：与 <a href="https://www.w3school.com.cn/jsref/jsref_slice_string.asp" target="_blank" rel="noopener">slice()</a> 和 <a href="https://www.w3school.com.cn/jsref/jsref_substr.asp" target="_blank" rel="noopener">substr()</a> 方法不同的是，substring() 不接受负的参数。</strong></p>
-<h2 id="典型例题"><a href="#典型例题" class="headerlink" title="典型例题"></a>典型例题</h2><p>例题来源于leetcode28题。</p>
-<p>题目描述：给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。</p>
-<p>应用substring方法的代码实现如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">strStr</span><span class="params">(String haystack, String needle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> len = needle.length();</span><br><span class="line">        <span class="keyword">int</span> lenhay = haystack.length();</span><br><span class="line">        <span class="keyword">if</span> ( lenhay &lt; len )</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> star = <span class="number">0</span> ;</span><br><span class="line">        <span class="keyword">int</span> end = len-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (end &lt; lenhay)&#123;</span><br><span class="line">             <span class="keyword">if</span> (haystack.substring(star,end+<span class="number">1</span>).equals(needle))&#123;</span><br><span class="line">                 <span class="keyword">return</span> star;</span><br><span class="line">             &#125;</span><br><span class="line">            end++;</span><br><span class="line">            star++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution12</span></span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    Solution num = <span class="keyword">new</span> Solution();</span><br><span class="line">    String a = <span class="string">"beautiful"</span>;</span><br><span class="line">    String b = <span class="string">"ti"</span>;</span><br><span class="line">    <span class="keyword">int</span> i = num.strStr(a,b);</span><br><span class="line">    System.out.println(<span class="string">"子串在主串中的序号为："</span>+i);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果为：</p>
+        <h1 id="数组加一"><a href="#数组加一" class="headerlink" title="数组加一"></a>数组加一</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p><strong>示例1：</strong></p>
 <blockquote>
-<p>子串在主串中的序号为：4</p>
+<p>输入: [1,2,3]<br>输出: [1,2,4]<br>解释: 输入数组表示数字 123。</p>
 </blockquote>
-<p>链接：<a href="https://leetcode-cn.com/problems/implement-strstr" target="_blank" rel="noopener">https://leetcode-cn.com/problems/implement-strstr</a></p>
+<p> <strong>示例2：</strong></p>
+<blockquote>
+<p>输入: [4,3,2,1]<br>输出: [4,3,2,2]<br>解释: 输入数组表示数字 4321。</p>
+</blockquote>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>本题其实思路很简单，无非就是两种情况：</p>
+<ol>
+<li>数字9加一</li>
+<li>非数字9加一</li>
+</ol>
+<p>第二种情况直接在末尾处加一然后返回数组，不用考虑进位；第一种情况略微复杂，需要判断倒数第二位加1之后是否需要进位，如果倒数第二位也是9，即数字是**99的话，再往前推一位，考虑倒数第三位加1后是否需要进位，依次类推，直到数组头或者不需要进位为止。</p>
+<h2 id="程序实现"><a href="#程序实现" class="headerlink" title="程序实现"></a>程序实现</h2><p>按照上述的解题思路，可以写出如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span>[] plusOne(<span class="keyword">int</span>[] digits) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = digits.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">            digits[i]++;</span><br><span class="line">            digits[i] = digits[i] % <span class="number">10</span>;</span><br><span class="line">            <span class="keyword">if</span> (digits[i] != <span class="number">0</span>) <span class="keyword">return</span> digits;</span><br><span class="line">        &#125;</span><br><span class="line">        digits = <span class="keyword">new</span> <span class="keyword">int</span>[digits.length + <span class="number">1</span>];</span><br><span class="line">        digits[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> digits;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>来源：<a href="https://leetcode-cn.com/problems/plus-one" target="_blank" rel="noopener">力扣（LeetCode）</a></p>
+<p>原文链接<a href="https://leetcode-cn.com/problems/plus-one/solution/java-shu-xue-jie-ti-by-yhhzw/" target="_blank" rel="noopener">（戳此）</a></p>
 
       
 
@@ -252,7 +228,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">【3】字符串匹配问题</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">【8】数组加一</a>
         		</li>
       		
 		</ul>
@@ -308,7 +284,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/11/string/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/19/leetcode66/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -322,18 +298,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/12/leetcode35/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          java小白初编程
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/09/11/dynamic/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">矩阵连乘最小次数问题</div>
+    <a href="/2019/09/18/java-project/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">仓库管理系统</div>
       <i class="icon-circle-right"></i>
     </a>
   
