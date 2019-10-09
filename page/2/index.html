@@ -152,6 +152,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-immutable" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/16/immutable/">immutable的用法</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/16/immutable/" class="archive-article-date">
+  	<time datetime="2019-09-16T03:20:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="IMMUTABLE-详解"><a href="#IMMUTABLE-详解" class="headerlink" title="IMMUTABLE 详解"></a>IMMUTABLE 详解</h1><p>有人说 Immutable 可以给 React 应用带来数十倍的提升，也有人说 Immutable 的引入是近期 JavaScript 中伟大的发明，因为同期 React 太火，它的光芒被掩盖了。这些至少说明 Immutable 是很有价值的，下面我们来一探究竟。</p>
+<p>JavaScript 中的对象一般是可变的（Mutable），因为使用了引用赋值，新的对象简单的引用了原始对象，改变新的对象将影响到原始对象。如 <code>foo={a: 1}; bar=foo; bar.a=2</code> 你会发现此时 <code>foo.a</code> 也被改成了 <code>2</code>。虽然这样做可以节约内存，但当应用复杂后，这就造成了非常大的隐患，Mutable 带来的优点变得得不偿失。为了解决这个问题，一般的做法是使用 shallowCopy（浅拷贝）或 deepCopy（深拷贝）来避免被修改，但这样做造成了 CPU 和内存的浪费。</p>
+<p>Immutable 可以很好地解决这些问题。</p>
+<h2 id="什么是-IMMUTABLE-DATA"><a href="#什么是-IMMUTABLE-DATA" class="headerlink" title="什么是 IMMUTABLE DATA"></a>什么是 IMMUTABLE DATA</h2><p>Immutable Data 就是一旦创建，就不能再被更改的数据。对 Immutable 对象的任何修改或添加删除操作都会返回一个新的 Immutable 对象。Immutable 实现的原理是 Persistent Data Structure（持久化数据结构），也就是使用旧数据创建新数据时，要保证旧数据同时可用且不变。同时为了避免 deepCopy 把所有节点都复制一遍带来的性能损耗，Immutable 使用了 Structural Sharing（结构共享），即如果对象树中一个节点发生变化，只修改这个节点和受它影响的父节点，其它节点则进行共享。请看下面动画：</p>
+<div>
+ <div align="center">
+ <img src="/2019/09/16/immutable/687474703a2f2f696d672e616c6963646e2e636f6d2f7470732f69322f5442317a7a695f4b5858585858637458465858627262384f5658582d3631332d3537352e676966.gif">
+</div>
+
+<h2 id="实现immutable-的类"><a href="#实现immutable-的类" class="headerlink" title="实现immutable 的类"></a>实现immutable 的类</h2><p>方法如下：</p>
+<ol>
+<li>将class自身声明为final，这样别人就不能扩展来绕过限制了</li>
+<li>将所有成员变量定义为private和final，并且不要实现setter方法</li>
+<li>通常构造对象时，成员变量使用深度拷贝来初始化，而不是直接赋值，这是一种防御措施，因为你无法确定输入对象不被其他人修改</li>
+<li>如果确实要实现getter方法，或者其他可能会返回内部状态的方法，使用copy-on-write原则，创建私有的copy</li>
+</ol>
+<p>这些原则是不是在并发编程实践中经常被提到？的确如此。 </p>
+<p>关于 setter/getter 方法，很多人喜欢直接用 IDE 一次全部生成，建议最好是你确定有需要时再实现。</p>
+<p>原文链接: <a href="https://time.geekbang.org/column/article/6906" target="_blank" rel="noopener">https://time.geekbang.org/column/article/6906</a></p>
+</div>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">极客时间学习收获</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/16/immutable/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-try-with-resource" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1241,131 +1333,6 @@
 
 
   
-    <article id="post-leetcode27" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/07/leetcode27/">二叉树遍历</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/07/leetcode27/" class="archive-article-date">
-  	<time datetime="2019-09-07T07:36:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一-C语言实现二叉树的遍历"><a href="#一-C语言实现二叉树的遍历" class="headerlink" title="一. C语言实现二叉树的遍历"></a>一. C语言实现二叉树的遍历</h1><p>二叉树是一种基本的数据结构，是一种每个节点的子节点数目不多于2的树。关于二叉树的节点声明如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">PtrToNode</span>;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">BinTree</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> Data;    <span class="comment">//为简单起见，不妨假设树节点的元素为int型</span></span><br><span class="line">    BinTree Left;</span><br><span class="line">    BinTree Right;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>二叉树的遍历有先序遍历、中序遍历、后序遍历、层序遍历四种方式。</p>
-<h2 id="1-1-先序遍历"><a href="#1-1-先序遍历" class="headerlink" title="1.1 先序遍历"></a>1.1 先序遍历</h2><p>在先序遍历中，首先访问根节点，然后再访问其左右子节点。由于树可以用递归来定义，所以树的常见操作也用递归来实现。递归实现的代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrderTraversal</span><span class="params">(BinTree BT)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( BT ) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(“%d\n”, BT-&gt;Data);        <span class="comment">//对节点做些访问比如打印         </span></span><br><span class="line">        PreOrderTraversal(BT-&gt;Left);     <span class="comment">//访问左儿子</span></span><br><span class="line">        PreOrderTraversal(BT-&gt;Right);    <span class="comment">//访问右儿子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当数据规模较大时，这种递归的方式会占用大量的存储空间，容易越出栈空间。因此使用非递归先序遍历算法，基本思路是使用堆栈，先访问（打印）根节点，然后再将根节点的所有左节点压入堆栈，之后弹出根节点，转向根节点的右子树，重复之前的操作直到栈为空或者树中无节点为止。实现代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PreOrderTraversal</span><span class="params">(BinTree BT)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    BinTree T = BT;</span><br><span class="line">    Stack S = CreatStack(MAX_SIZE);    <span class="comment">//创建并初始化堆栈S</span></span><br><span class="line">    <span class="keyword">while</span>(T || !IsEmpty(S))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(T)        <span class="comment">//一直向左并将沿途节点访问（打印）后压入堆栈 </span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, T-&gt;Data);</span><br><span class="line">            Push(S, T);</span><br><span class="line">            T = T-&gt;Left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!IsEmpty(S))</span><br><span class="line">        &#123;</span><br><span class="line">            T = Pop(S);    <span class="comment">//节点弹出堆栈</span></span><br><span class="line">            T = T-&gt;Right;  <span class="comment">//转向右子树</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="1-2-中序遍历"><a href="#1-2-中序遍历" class="headerlink" title="1.2 中序遍历"></a>1.2 中序遍历</h2><p>中序遍历的思想和先序遍历的思想差不多，中序遍历先遍历左子树，再访问根节点，最后遍历右子树。递归实现的代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrderTraversal</span><span class="params">(BinTree BT)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(BT)</span><br><span class="line">    &#123;</span><br><span class="line">        InOrderTraversal(BT-&gt;Left);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, BT-&gt;Data);</span><br><span class="line">        InOrderTraversal(BT-&gt;Right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>同样在用递归实现中序遍历的过程中会遇到栈溢出的问题，因此用非递归辅助栈的实现代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InOrderTraversal</span><span class="params">(BinTree BT)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    BinTree T = BT;</span><br><span class="line">    Stack S = CreatStack(MaxSize); <span class="comment">//创建并初始化堆栈S</span></span><br><span class="line">    <span class="keyword">while</span>(T || !IsEmpty(S))　　&#123;</span><br><span class="line">    　　<span class="keyword">while</span>(T)    <span class="comment">//一直向左并将沿途节点压入堆栈</span></span><br><span class="line">    　　&#123; </span><br><span class="line">       　　 Push(S,T);</span><br><span class="line">        　　T = T-&gt;Left;</span><br><span class="line">    　　&#125;</span><br><span class="line">    　　<span class="keyword">if</span>(!IsEmpty(S))</span><br><span class="line">    　　&#123;</span><br><span class="line">       　　 T = Pop(S);                <span class="comment">//节点弹出堆栈</span></span><br><span class="line">       　　 <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, T-&gt;Data);    <span class="comment">//（访问） 打印结点</span></span><br><span class="line">      　　  T = T-&gt;Right;              <span class="comment">//转向右子树</span></span><br><span class="line">    　　&#125;　　&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注释：根节点的值在序列的中间。</p>
-<h2 id="1-3-后序遍历"><a href="#1-3-后序遍历" class="headerlink" title="1.3 后序遍历"></a>1.3 后序遍历</h2><p>后序遍历的思想与先序遍历和中序遍历的思想一样，先遍历左节点，再遍历右节点，最后再访问根节点。递归实现的代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PostOrderTraversal</span><span class="params">(BinTree BT)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (BT)</span><br><span class="line">    &#123;</span><br><span class="line">        PostOrderTraversal(BT-&gt;Left);</span><br><span class="line">        PostOrderTraversal(BT-&gt;Right);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, BT-&gt;Data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>后序遍历的非递归思想比较特殊，我们知道，先序遍历的思想是根节点—左节点—右节点，而，如果我们将根节点、左节点、右节点依次压入栈中，然后再出栈，最终得到右节点—左节点—根节点，这和后序遍历的差别只在于左节点和右节点的顺序互换位置。因此我们只需要把先序遍历中的左右节点操作调换并把节点压入另一个栈中即可。代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PostOrderTraversal</span><span class="params">(BinTree BT)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    BinTree T = BT;</span><br><span class="line">    Stack S1 = CreatStack(MAX_SIZE);    <span class="comment">//创建并初始化堆栈S1</span></span><br><span class="line">    Stack S2 = CreatStack(MAX_SIZE);    <span class="comment">//创建并初始化堆栈S2   </span></span><br><span class="line">    <span class="keyword">while</span>(T || !IsEmpty(S1))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(T)        <span class="comment">//一直向右并将沿途节点访问（压入S2）后压入堆栈S1 </span></span><br><span class="line">        &#123;</span><br><span class="line">            Push(S2, T);</span><br><span class="line">            Push(S1, T);</span><br><span class="line">            T = T-&gt;Right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!IsEmpty(S1))</span><br><span class="line">        &#123;</span><br><span class="line">            T = Pop(S1);    <span class="comment">//节点弹出堆栈</span></span><br><span class="line">            T = T-&gt;Left;  <span class="comment">//转向左子树</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(!IsEmpty(S2))    <span class="comment">//访问（打印）S2中元素</span></span><br><span class="line">    &#123;</span><br><span class="line">        T = Pop(S2);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, T-&gt;Data);</span><br><span class="line">    &#125;          </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="1-4-层序遍历"><a href="#1-4-层序遍历" class="headerlink" title="1.4 层序遍历"></a>1.4 层序遍历</h2><p>此处我们用队列来实现层序遍历，队列实现的基本思路：遍历从根节点开始，首先将根节点入队，然后执行循环：节点出队，访问（访问）根节点，将左儿子入队，将右儿子入队，直到队列为空停止。这种遍历方式的结果是将二叉树从上到下，从左至右一层一层的遍历，即层序遍历，代码实现如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LevelOrderTraversal</span><span class="params">(BinTree BT)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    BinTree T;</span><br><span class="line">    Queue Q;    <span class="comment">//声明一个队列</span></span><br><span class="line">    <span class="keyword">if</span> (BT == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;                 <span class="comment">//如果树为空，直接返回</span></span><br><span class="line">    Q = CreatQueue(MAX_SIZE);   <span class="comment">//创建并初始化队列</span></span><br><span class="line">    AddQ(Q, BT);                <span class="comment">//将根节点入队</span></span><br><span class="line">    <span class="keyword">while</span> (!IsEmpty(Q))</span><br><span class="line">    &#123;</span><br><span class="line">        T = DeleteQ(Q);    　　　　　　　　　　<span class="comment">//节点出队</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, T-&gt;Data);    　　　　 <span class="comment">//访问出队的节点</span></span><br><span class="line">        <span class="keyword">if</span> (T-&gt;Left)    AddQ(Q, T-&gt;Left);   <span class="comment">//若左儿子不为空，将其入队 </span></span><br><span class="line">        <span class="keyword">if</span> (T-&gt;Right)    AddQ(Q, T-&gt;Right)  <span class="comment">//若右儿子不为空，将其入队</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="二-java实现二叉树的构建"><a href="#二-java实现二叉树的构建" class="headerlink" title="二. java实现二叉树的构建"></a>二. java实现二叉树的构建</h1><p>构建一个二叉树分为三个步骤：</p>
-<ol>
-<li>定义一个数组，数组中的元素包括二叉树节点的值</li>
-<li>将int型的数转换为节点</li>
-<li>将各个节点构造成树，包括确定每个节点的左右子节点</li>
-</ol>
-<p>用数组构建二叉树的具体代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;  </span><br><span class="line"><span class="keyword">import</span> java.util.List;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinTreeTraverse2</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] array = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> List&lt;Node&gt; nodeList = <span class="keyword">null</span>;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;  </span><br><span class="line">        Node leftChild;  </span><br><span class="line">        Node rightChild;  </span><br><span class="line">        <span class="keyword">int</span> data;  </span><br><span class="line">  </span><br><span class="line">        Node(<span class="keyword">int</span> newData) &#123;  </span><br><span class="line">            leftChild = <span class="keyword">null</span>;  </span><br><span class="line">            rightChild = <span class="keyword">null</span>;  </span><br><span class="line">            data = newData;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createBinTree</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        nodeList = <span class="keyword">new</span> LinkedList&lt;Node&gt;();  </span><br><span class="line">        <span class="comment">// 将一个数组的值依次转换为Node节点  </span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> nodeIndex = <span class="number">0</span>; nodeIndex &lt; array.length; nodeIndex++) &#123;  </span><br><span class="line">            nodeList.add(<span class="keyword">new</span> Node(array[nodeIndex]));  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="comment">// 对前lastParentIndex-1个父节点按照父节点与孩子节点的数字关系建立二叉树  </span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> parentIndex = <span class="number">0</span>; parentIndex &lt; array.length / <span class="number">2</span> - <span class="number">1</span>; parentIndex++) &#123;  </span><br><span class="line">            <span class="comment">// 左孩子  </span></span><br><span class="line">            nodeList.get(parentIndex).leftChild = nodeList  </span><br><span class="line">                    .get(parentIndex * <span class="number">2</span> + <span class="number">1</span>);  </span><br><span class="line">            <span class="comment">// 右孩子  </span></span><br><span class="line">            nodeList.get(parentIndex).rightChild = nodeList  </span><br><span class="line">                    .get(parentIndex * <span class="number">2</span> + <span class="number">2</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="comment">// 最后一个父节点:因为最后一个父节点可能没有右孩子，所以单独拿出来处理  </span></span><br><span class="line">        <span class="keyword">int</span> lastParentIndex = array.length / <span class="number">2</span> - <span class="number">1</span>;  </span><br><span class="line">        <span class="comment">// 左孩子  </span></span><br><span class="line">        nodeList.get(lastParentIndex).leftChild = nodeList  </span><br><span class="line">                .get(lastParentIndex * <span class="number">2</span> + <span class="number">1</span>);  </span><br><span class="line">        <span class="comment">// 右孩子,如果数组的长度为奇数才建立右孩子  </span></span><br><span class="line">        <span class="keyword">if</span> (array.length % <span class="number">2</span> == <span class="number">1</span>) &#123;  </span><br><span class="line">            nodeList.get(lastParentIndex).rightChild = nodeList  </span><br><span class="line">                    .get(lastParentIndex * <span class="number">2</span> + <span class="number">2</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/09/07/leetcode27/1568039199143.png" alt="1568039199143"></p>
-<h2 id="2-1-先序遍历"><a href="#2-1-先序遍历" class="headerlink" title="2.1 先序遍历"></a>2.1 先序遍历</h2><p>用Java语言实现的先序遍历代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">preOrderTraverse</span><span class="params">(Node node)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>)  </span><br><span class="line">            <span class="keyword">return</span>;  </span><br><span class="line">        System.out.print(node.data + <span class="string">" "</span>);  </span><br><span class="line">        preOrderTraverse(node.leftChild);  </span><br><span class="line">        preOrderTraverse(node.rightChild);  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>首先打印根节点的值，然后在遍历左子树，最后再遍历右子树。</p>
-<h2 id="2-2-中序遍历"><a href="#2-2-中序遍历" class="headerlink" title="2.2 中序遍历"></a>2.2 中序遍历</h2><p>用java语言实现的中序遍历代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">inOrderTraverse</span><span class="params">(Node node)</span> </span>&#123;  </span><br><span class="line">       <span class="keyword">if</span> (node == <span class="keyword">null</span>)  </span><br><span class="line">           <span class="keyword">return</span>;  </span><br><span class="line">       inOrderTraverse(node.leftChild);  </span><br><span class="line">       System.out.print(node.data + <span class="string">" "</span>);  </span><br><span class="line">       inOrderTraverse(node.rightChild);  </span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>首先遍历左子树，然后打印根节点的值，最后再遍历右子树。</p>
-<h2 id="2-3-后续遍历"><a href="#2-3-后续遍历" class="headerlink" title="2.3 后续遍历"></a>2.3 后续遍历</h2><p>用java语言实现的后序遍历代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">postOrderTraverse</span><span class="params">(Node node)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">if</span> (node == <span class="keyword">null</span>)  </span><br><span class="line">            <span class="keyword">return</span>;  </span><br><span class="line">        postOrderTraverse(node.leftChild);  </span><br><span class="line">        postOrderTraverse(node.rightChild);  </span><br><span class="line">        System.out.print(node.data + <span class="string">" "</span>);  </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>首先遍历左子树，然后遍历右子树，最后访问根节点。</p>
-<h2 id="2-4-典型案例"><a href="#2-4-典型案例" class="headerlink" title="2.4 典型案例"></a>2.4 典型案例</h2><p>下面介绍一个求所有左子树的和的算法程序，代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Node left;</span><br><span class="line">	<span class="keyword">private</span> Node right;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> value;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(Node left, Node right, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.left = left;</span><br><span class="line">		<span class="keyword">this</span>.right = right;</span><br><span class="line">		<span class="keyword">this</span>.value = value;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Node <span class="title">getLeft</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> left;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLeft</span><span class="params">(Node left)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.left = left;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Node <span class="title">getRight</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> right;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRight</span><span class="params">(Node right)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.right = right;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> value;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setValue</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.value = value;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 写一个递归的方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinTree</span></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sumLeft</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> sum =<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(node.getLeft()!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			sum +=node.getLeft().getValue(); </span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(node.getLeft()!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			sumLeft(node.getLeft());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(node.getRight()!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			sumLeft(node.getRight());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> sum;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//写几个节点验证一下</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Node node111 = <span class="keyword">new</span> Node(<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="number">1</span>); </span><br><span class="line">		Node node112 = <span class="keyword">new</span> Node(<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="number">2</span>); </span><br><span class="line">		Node node11 = <span class="keyword">new</span> Node(node111, node112, <span class="number">3</span>); </span><br><span class="line">		Node node12 = <span class="keyword">new</span> Node(<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="number">4</span>); </span><br><span class="line">		Node node1 = <span class="keyword">new</span> Node(node11, node12, <span class="number">5</span>);</span><br><span class="line">		System.out.println(sumLeft(node1));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>最后输出结果：3</p>
-<h2 id="2-5-结果分析"><a href="#2-5-结果分析" class="headerlink" title="2.5 结果分析"></a>2.5 结果分析</h2><p>为什么是3呢？我们分析一下这个程序，首先node111和node112这两个节点都是没有左右子树的，他们的值分别为1和2，node11这个节点的左右子树分别为node111和node112，该子二叉树的值为3，node12没有左右子树并且node1节点的左右子树分别为node11和node12，所有我们画个图分析一下就知道，整个二叉树的左子树和为node11子树的值。图示如下：</p>
-<div>
- <div align="center">
- <img src="/2019/09/07/leetcode27/1568012634270.png" width="400" height="300">    
-</div> 
-
-
-
-
-
-<p>本文转载至：</p>
-<p><a href="https://www.cnblogs.com/crazylqy/p/7688665.html" target="_blank" rel="noopener">https://www.cnblogs.com/crazylqy/p/7688665.html</a></p>
-<p><a href="https://www.cnblogs.com/llhthinker/p/4747962.html" target="_blank" rel="noopener">https://www.cnblogs.com/llhthinker/p/4747962.html</a></p>
-</div>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">二叉树构建</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/07/leetcode27/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1496,7 +1463,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">【4】数组中搜索插入位置</a>
+                <a href="javascript:void(0)" class="js-tag color4">【13】相同的树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1504,11 +1471,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">【2】删除排序数组中的重复项</a>
+                <a href="javascript:void(0)" class="js-tag color3">【4】数组中搜索插入位置</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">【5】报数</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">【2】删除排序数组中的重复项</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1524,7 +1495,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">【11】删除排序链表中的重复元素</a>
+                <a href="javascript:void(0)" class="js-tag color3">【12】合并两个有序数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1532,11 +1503,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">【3】字符串匹配问题</a>
+                <a href="javascript:void(0)" class="js-tag color2">【11】删除排序链表中的重复元素</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">【12】合并两个有序数组</a>
+                <a href="javascript:void(0)" class="js-tag color1">【3】字符串匹配问题</a>
               </li>
              
               <li class="article-tag-list-item">
